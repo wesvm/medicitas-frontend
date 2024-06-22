@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import DashboardLayout from '@/setup/DashboardLayout';
 
 import { LoginPage } from '@/pages/LoginPage';
-import { CalendarSearch } from 'lucide-react';
+import { CalendarPlus, CalendarSearch } from 'lucide-react';
 import { WelcomePage } from '@/pages/WelcomePage';
 import { ForgotPasswordPage } from '@/pages/ForgotPasswordPage';
 
@@ -12,7 +12,13 @@ const pacienteRoutes = [
     icon: CalendarSearch,
     label: "Mis Citas",
     href: "mis-citas",
-    element: (<div>estas son mis citas</div>)
+    element: (<div className="p-4">estas son mis citas</div>)
+  },
+  {
+    icon: CalendarPlus,
+    label: "Mis Citas",
+    href: "crear-cita",
+    element: (<div className="p-4">crear una nueva cita</div>)
   }
 ];
 
