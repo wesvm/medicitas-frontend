@@ -2,7 +2,7 @@ import pwd_image from "@/assets/pwd-image.jpg"
 import unam_logo from '@/assets/logo_unam.png'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface SendTokenCardProps {
     setRecovery: (recovery: boolean) => void;
