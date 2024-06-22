@@ -16,7 +16,7 @@ const pacienteRoutes = [
   },
   {
     icon: CalendarPlus,
-    label: "Mis Citas",
+    label: "Crear Cita",
     href: "crear-cita",
     element: (<div className="p-4">crear una nueva cita</div>)
   }
