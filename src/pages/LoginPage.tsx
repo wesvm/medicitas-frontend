@@ -1,9 +1,10 @@
 import logo_medicitas from '@/assets/logo_medicitas.jpg'
 import unam_logo from '@/assets/logo_unam.png'
 
-import { Input, InputProps } from "@/components/ui/input"
+import { Input } from "@/components/ui/input"
 import { Button } from '@/components/ui/button'
 import { useNavigate } from 'react-router-dom'
+import { PasswordInput } from '@/components/password-input'
 
 export const LoginPage = () => {
 
@@ -14,9 +15,9 @@ export const LoginPage = () => {
     }
 
     return (
-        <main className="bg-gray-100 h-screen">
+        <main className="bg-gray-100 h-svh">
             <section className="flex items-center py-24 max-w-4xl mx-auto gap-x-12">
-                <div className="bg-white p-10 rounded-lg shadow-lg grid gap-4 mx-auto min-w-80  ">
+                <div className="bg-white p-10 rounded-lg shadow-lg grid gap-4 min-w-80 mx-auto">
                     <header>
                         <img src={unam_logo} alt="logo unam" className="size-24 mx-auto" />
                         <h3 className="text-sm py-2 font-medium">Universidad Nacional de Moquegua</h3>
@@ -26,22 +27,22 @@ export const LoginPage = () => {
                     <form className="grid gap-4">
                         <div>
                             <label htmlFor="user" className="text-xs">Usuario: </label>
-                            <LoginInput id="user" name="user" placeholder="76543210" type="text" />
+                            <Input id="user" name="user" placeholder="76543210" type="text" />
                         </div>
 
                         <div>
                             <label htmlFor="password" className="text-xs">Contraseña: </label>
-                            <LoginInput id="password" name="password" placeholder="******" type="password" />
+                            <PasswordInput id="password" name="password" placeholder="******" />
                         </div>
 
-                        <Button className="rounded-full bg-blue-800 hover:bg-blue-900 h-8"
+                        <Button variant="blue"
                             onClick={handleSubmit}
                         >
                             Ingresar
                         </Button>
                     </form>
                     <footer className="mx-auto">
-                        <a href="/" className="text-center text-sm text-blue-800 hover:text-blue-900 underline font-medium">
+                        <a href="/recuperar-contraseña" className="text-center text-sm text-blue-800 hover:text-blue-900 underline font-medium">
                             Olvidé mi contraseña
                         </a>
                     </footer>
@@ -59,11 +60,5 @@ export const LoginPage = () => {
                 </div>
             </section>
         </main>
-    )
-}
-
-const LoginInput = ({ ...props }: InputProps) => {
-    return (
-        <Input className="rounded-full w-full bg-slate-100 focus-visible:ring-slate-20 h-8" {...props} />
     )
 }
