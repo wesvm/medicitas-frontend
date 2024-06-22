@@ -5,6 +5,7 @@ import DashboardLayout from '@/setup/DashboardLayout';
 import { LoginPage } from '@/pages/LoginPage';
 import { CalendarSearch } from 'lucide-react';
 import { WelcomePage } from '@/pages/WelcomePage';
+import { ForgotPasswordPage } from '@/pages/ForgotPasswordPage';
 
 const pacienteRoutes = [
   {
@@ -28,6 +29,7 @@ function App() {
     <Routes>
       <Route path='*' element={<div>404 not found</div>} />
       <Route path='/' element={<LoginPage />} />
+      <Route path='/recuperar-contraseña' element={<ForgotPasswordPage />} />
 
       <Route path='/paciente' element={<DashboardLayout />}>
         <Route index element={<WelcomePage />} />
