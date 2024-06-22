@@ -9,7 +9,7 @@ const container = document.getElementById("root");
 const root = createRoot(container!);
 
 root.render(
-  <ThemeProvider defaultTheme="system" storageKey="ui-theme">
+  <ThemeProvider defaultTheme="light" storageKey="ui-theme">
     <BrowserRouter>
       <App />
       <Toaster richColors />
