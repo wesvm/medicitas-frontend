@@ -16,9 +16,13 @@ export const RecoveryPassword = () => {
         navigate('/')
     }
 
+    const handleBackLogin = () => {
+        navigate('/')
+    }
+
     return (
         <section className="bg-white px-8 rounded-lg shadow-lg mx-auto min-w-80 flex items-center space-x-8">
-            <div className="grid gap-4 w-full">
+            <div className="grid gap-4">
                 <header>
                     <img src={unam_logo} alt="logo unam" className="size-24 mx-auto" />
                     <h2 className="text-lg text-center font-semibold">Recuperar Contraseña</h2>
@@ -44,13 +48,13 @@ export const RecoveryPassword = () => {
                     </Button>
                 </form>
                 <footer className="mx-auto pb-4">
-                    <a href="/" className="text-center text-sm text-blue-800 hover:text-blue-900 underline font-medium">
+                    <button onClick={handleBackLogin} className="text-center text-sm text-blue-800 hover:text-blue-900 underline font-medium">
                         Regresar al login
-                    </a>
+                    </button>
                 </footer>
             </div>
 
-            <img src={pwd_image} alt="Contraseña olvidada" className="hidden md:block h-[380px]" />
+            <img src={pwd_image} alt="Contraseña olvidada" className="hidden md:block h-[380px] w-[300px]" />
         </section>
     )
 }

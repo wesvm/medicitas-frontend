@@ -14,6 +14,10 @@ export const LoginPage = () => {
         navigate('/paciente')
     }
 
+    const handleForgotPasswordClick = () => {
+        navigate("/recuperar-contraseña");
+    };
+
     return (
         <main className="bg-gray-100 h-svh">
             <section className="flex items-center py-24 max-w-4xl mx-auto gap-x-12">
@@ -42,9 +46,9 @@ export const LoginPage = () => {
                         </Button>
                     </form>
                     <footer className="mx-auto">
-                        <a href="/recuperar-contraseña" className="text-center text-sm text-blue-800 hover:text-blue-900 underline font-medium">
+                        <button onClick={handleForgotPasswordClick} className="text-center text-sm text-blue-800 hover:text-blue-900 underline font-medium">
                             Olvidé mi contraseña
-                        </a>
+                        </button>
                     </footer>
                 </div>
                 <div className="bg-white p-10 rounded-lg shadow-lg hidden md:block w-full">
@@ -56,7 +60,7 @@ export const LoginPage = () => {
                             <li>944 828 090</li>
                         </ul>
                     </div>
-                    <img src={logo_medicitas} alt="logo medicitas" className="w-64 rounded-xl mx-auto" />
+                    <img src={logo_medicitas} alt="logo medicitas" className="size-64 rounded-xl mx-auto" />
                 </div>
             </section>
         </main>
