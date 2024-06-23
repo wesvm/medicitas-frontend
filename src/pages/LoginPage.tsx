@@ -15,16 +15,18 @@ export const LoginPage = () => {
     }
 
     const handleForgotPasswordClick = () => {
-        navigate("/recuperar-contraseña");
+        navigate('/recuperar-contraseña');
     };
 
     return (
         <main className="bg-gray-100 h-svh">
-            <section className="flex items-center py-24 max-w-4xl mx-auto gap-x-12">
+            <section className="flex items-center h-full max-w-4xl mx-auto gap-x-12">
                 <div className="bg-white p-10 rounded-lg shadow-lg grid gap-4 min-w-80 mx-auto">
                     <header>
                         <img src={unam_logo} alt="logo unam" className="size-24 mx-auto" />
-                        <h3 className="text-sm py-2 font-medium">Universidad Nacional de Moquegua</h3>
+                        <h3 className="text-sm py-2 font-medium text-center">
+                            Universidad Nacional de Moquegua
+                        </h3>
                         <h2 className="text-lg text-center font-bold">MEDICITAS</h2>
                     </header>
                     <hr />

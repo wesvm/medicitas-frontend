@@ -22,7 +22,7 @@ export const SendTokenCard = ({ setRecovery }: SendTokenCardProps) => {
 
     return (
         <section className="bg-white px-8 rounded-lg shadow-lg mx-auto min-w-80 flex items-center space-x-8">
-            <div className="grid gap-4">
+            <div className="grid gap-4 w-full">
                 <header>
                     <img src={unam_logo} alt="logo unam" className="size-24 mx-auto" />
                     <h2 className="text-lg text-center font-semibold">Recuperar Contraseña</h2>

@@ -9,12 +9,10 @@ export const ForgotPasswordPage = () => {
     return (
         <main className="bg-gray-100 h-svh">
             <div className="flex items-center h-full">
-                <>
-                    {!recovery ?
-                        <SendTokenCard setRecovery={setRecovery} /> :
-                        <RecoveryPassword />
-                    }
-                </>
+                {!recovery ?
+                    <SendTokenCard setRecovery={setRecovery} /> :
+                    <RecoveryPassword />
+                }
             </div>
         </main>
     )
