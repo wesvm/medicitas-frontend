@@ -18,11 +18,12 @@ export const SidebarItem = ({
     const location = useLocation();
     const navigate = useNavigate();
     const { setOpen } = useMovilSidebarSheetStore();
+    const fullHref = `/dashboard/${href}`;
 
     const isActive =
         (location.pathname === "/" && href === "/") ||
-        location.pathname === href ||
-        location.pathname?.startsWith(`${href}/`);
+        location.pathname === fullHref ||
+        location.pathname?.startsWith(`${fullHref}/`);
 
     const onClick = () => {
         navigate(href);
