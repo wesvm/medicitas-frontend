@@ -3,6 +3,9 @@ import unam_logo from '@/assets/logo_unam.png'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { forgotPassword } from "@/api/auth";
+import { toast } from "sonner";
 
 interface SendTokenCardProps {
     setRecovery: (recovery: boolean) => void;
@@ -11,9 +14,33 @@ interface SendTokenCardProps {
 export const SendTokenCard = ({ setRecovery }: SendTokenCardProps) => {
 
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
+    const [dni, setDni] = useState("");
 
-    const handleSubmit = () => {
-        setRecovery(true);
+    const handleSubmit = async () => {
+        setLoading(true);
+
+        const promise = forgotPassword(dni)
+            .then((res) => {
+                setRecovery(true);
+                return res;
+            })
+            .catch((err) => {
+                if ((err as any).status === 422)
+                    throw new Error("Reset password failed...");
+                throw err;
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+
+        toast.promise(promise, {
+            loading: 'Enviando token...',
+            success: (res) => {
+                return `${res.message}`;
+            },
+            error: 'Ingrese un DNI válido..'
+        });
     }
 
     const handleBackLogin = () => {
@@ -30,11 +57,13 @@ export const SendTokenCard = ({ setRecovery }: SendTokenCardProps) => {
                 <form className="grid gap-4">
                     <div>
                         <label htmlFor="dni" className="text-xs">Usuario (DNI): </label>
-                        <Input id="dni" name="dni" placeholder="76543210" type="text" />
+                        <Input id="dni" name="dni" placeholder="76543210" type="text"
+                            onChange={(e) => setDni(e.target.value)}
+                            disabled={loading} />
                     </div>
 
-                    <Button variant="blue" className="md:w-80"
-                        onClick={handleSubmit}
+                    <Button variant="blue" className="md:w-80" type="submit"
+                        onClick={handleSubmit} disabled={loading}
                     >
                         Obtener Token de Recuperacion
                     </Button>
