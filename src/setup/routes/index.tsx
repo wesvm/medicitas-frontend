@@ -1,20 +1,22 @@
-import { CalendarPlus, CalendarSearch } from "lucide-react";
+import { CalendarSearch, User, Users } from "lucide-react";
 import { useAuth } from "../AuthContext";
 import { USER_ROLE } from "@/lib/const";
+import { ListPacientesPage } from "@/pages/admin/ListPacientesPage";
+import { ListEspecialistasPage } from "@/pages/admin/ListEspecialistasPage";
 
 const adminRoutes = [
     {
-        icon: CalendarSearch,
-        label: "Mis Citas",
-        href: "admin-1",
-        element: (<div className="p-4">estas son mis citas</div>)
+        icon: User,
+        label: "Pacientes",
+        href: "pacientes",
+        element: (<ListPacientesPage />)
     },
     {
-        icon: CalendarPlus,
-        label: "Crear Cita",
-        href: "admin-2",
-        element: (<div className="p-4">crear una nueva cita</div>)
-    }
+        icon: Users,
+        label: "Especialistas",
+        href: "especialistas",
+        element: (<ListEspecialistasPage />)
+    },
 ];
 
 const pacienteRoutes = [
@@ -24,27 +26,15 @@ const pacienteRoutes = [
         href: "paciente-1",
         element: (<div className="p-4">estas son mis citas</div>)
     },
-    {
-        icon: CalendarPlus,
-        label: "Crear Cita",
-        href: "paciente-2",
-        element: (<div className="p-4">crear una nueva cita</div>)
-    }
 ];
 
 const especialistaRoutes = [
     {
-        icon: CalendarSearch,
-        label: "Mis Citas",
-        href: "especialista-1",
-        element: (<div className="p-4">estas son mis citas</div>)
+        icon: User,
+        label: "Pacientes",
+        href: "pacientes",
+        element: (<ListPacientesPage />)
     },
-    {
-        icon: CalendarPlus,
-        label: "Crear Cita",
-        href: "especialista-2",
-        element: (<div className="p-4">crear una nueva cita</div>)
-    }
 ];
 
 const appRoutes = () => {

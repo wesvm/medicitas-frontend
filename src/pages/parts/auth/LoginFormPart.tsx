@@ -4,9 +4,9 @@ import { toast } from "sonner";
 
 import { useAuth } from "@/setup/AuthContext";
 
-import { Input } from "@/components/ui/input";
 import { PasswordInput } from "@/components/password-input";
 import { Button } from "@/components/ui/button";
+import { LoginInput } from "@/components/login-input";
 
 export const LoginForm = () => {
     const navigate = useNavigate();
@@ -37,7 +37,7 @@ export const LoginForm = () => {
         <form className="grid gap-4">
             <label htmlFor="dni" className="text-xs">
                 <span className="text-xs">Username:</span>
-                <Input id="dni" name="dni" placeholder="76543210" type="text"
+                <LoginInput id="dni" name="dni" placeholder="76543210" type="text"
                     onChange={(e) => setDni(e.target.value)}
                     disabled={loading} />
             </label>

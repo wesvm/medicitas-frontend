@@ -1,11 +1,11 @@
 import pwd_image from "@/assets/pwd-image.jpg"
 import unam_logo from '@/assets/logo_unam.png'
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { forgotPassword } from "@/api/auth";
 import { toast } from "sonner";
+import { LoginInput } from "@/components/login-input";
 
 interface SendTokenCardProps {
     setRecovery: (recovery: boolean) => void;
@@ -57,7 +57,7 @@ export const SendTokenCard = ({ setRecovery }: SendTokenCardProps) => {
                 <form className="grid gap-4">
                     <div>
                         <label htmlFor="dni" className="text-xs">Usuario (DNI): </label>
-                        <Input id="dni" name="dni" placeholder="76543210" type="text"
+                        <LoginInput id="dni" name="dni" placeholder="76543210" type="text"
                             onChange={(e) => setDni(e.target.value)}
                             disabled={loading} />
                     </div>
