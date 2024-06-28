@@ -14,7 +14,7 @@ export const PasswordInput = ({ ...props }: InputProps) => {
     return (
         <div className="relative">
             <Input
-                className="pr-9"
+                className="pr-9 h-8 rounded-full bg-slate-100 focus-visible:ring-slate-20"
                 type={showPassword ? "text" : "password"}
                 {...props}
             />
