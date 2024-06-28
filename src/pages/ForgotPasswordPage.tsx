@@ -1,6 +1,6 @@
 import { useState } from "react"
-import { SendTokenCard } from "@/components/forgot-password/send-token-card"
-import { RecoveryPassword } from "@/components/forgot-password/recovery-password";
+import { SendTokenCard } from "@/pages/parts/forgot-password/send-token-card"
+import { RecoveryPassword } from "@/pages/parts/forgot-password/recovery-password";
 
 export const ForgotPasswordPage = () => {
 

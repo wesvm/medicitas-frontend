@@ -6,16 +6,19 @@ import { MobileSidebar } from "@/components/dashboard/movil-sidebar";
 import { Button } from "@/components/ui/button";
 
 import unam_logo from "@/assets/logo-unam-white.png"
+import { useAuth } from "@/setup/AuthContext";
 
 export const Navbar = () => {
     const navigate = useNavigate();
+    const { logOut, profile } = useAuth();
 
     const handleLogout = () => {
+        logOut();
         navigate('/');
     }
 
     const handleGoHome = () => {
-        navigate('/paciente');
+        navigate('/dashboard');
     }
 
     return (
@@ -26,7 +29,7 @@ export const Navbar = () => {
                     onClick={handleGoHome}
                 />
                 <div className="flex items-center jus gap-x-4 ml-auto">
-                    <span className="font-bold text-xl txt-shadow">Paciente</span>
+                    <span className="font-bold text-xl txt-shadow">{profile?.account.rol}</span>
                     <Button onClick={handleLogout} variant="outline" size="icon" >
                         <LogOut className="size-5" />
                     </Button>

@@ -3,6 +3,7 @@ import { Sidebar } from "@/components/dashboard/sidebar";
 import { Outlet } from "react-router-dom";
 
 const DashboardLayout = () => {
+
     return (
         <div className="h-full">
             <div className="h-[80px] w-full fixed">

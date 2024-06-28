@@ -1,18 +1,20 @@
 import { createRoot } from 'react-dom/client'
-import App from './setup/App.tsx'
-import './index.css'
-import { Toaster } from 'sonner'
-import { ThemeProvider } from './components/theme-provider.tsx'
 import { BrowserRouter } from 'react-router-dom'
+import './index.css'
+
+import { Toaster } from 'sonner'
+
+import AuthProvider from '@/setup/AuthContext.tsx'
+import App from '@/setup/App.tsx'
 
 const container = document.getElementById("root");
 const root = createRoot(container!);
 
 root.render(
-  <ThemeProvider defaultTheme="light" storageKey="ui-theme">
+  <AuthProvider>
     <BrowserRouter>
       <App />
-      <Toaster richColors />
     </BrowserRouter>
-  </ThemeProvider>
+    <Toaster richColors />
+  </AuthProvider>
 )
