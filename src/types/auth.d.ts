@@ -24,15 +24,13 @@ interface AdminData{
     telefono: string;
 }
 
-interface EspecialistaData{
-    nombres: string;
-    apellidos: string;
-    telefono: string;
-}
-
 interface AuthResponse {
     account: UserData;
     access_token: string;
     token_type: string;
     expires_in: number;
+}
+
+interface IMessageResponse {
+    message: string;
 }

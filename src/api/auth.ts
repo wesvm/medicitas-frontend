@@ -23,11 +23,7 @@ export const signIn = async (dni: string, password: string): Promise<AuthRespons
     return data;
 }
 
-interface ForgotPasswordResponse {
-    message: string;
-}
-
-export const forgotPassword = async (dni: string): Promise<ForgotPasswordResponse> => {
+export const forgotPassword = async (dni: string): Promise<IMessageResponse> => {
     const response = await fetch(`${URL}/password/forgot`, {
         method: 'POST',
         headers: {
@@ -40,7 +36,7 @@ export const forgotPassword = async (dni: string): Promise<ForgotPasswordRespons
         throw new Error(`Forgot password error: ${response.statusText}`);
     }
 
-    const data: ForgotPasswordResponse = await response.json();
+    const data: IMessageResponse = await response.json();
     return data;
 }
 
@@ -48,7 +44,7 @@ export const resetPassword = async (
     token: string, 
     password: string, 
     password_confirmation: string
-): Promise<ForgotPasswordResponse> => {
+): Promise<IMessageResponse> => {
     const response = await fetch(`${URL}/password/reset`, {
         method: 'POST',
         headers: {
@@ -61,6 +57,6 @@ export const resetPassword = async (
         throw new Error(`Reset password error: ${response.statusText}`);
     }
 
-    const data: ForgotPasswordResponse = await response.json();
+    const data: IMessageResponse = await response.json();
     return data;
 }

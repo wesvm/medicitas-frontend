@@ -1,5 +1,6 @@
 import { getAdmin } from "@/api/admin";
 import { signIn } from "@/api/auth";
+import { getEspecialista } from "@/api/especialista";
 import { getPaciente } from "@/api/paciente";
 import { getToken, getTokenExpiration, removeToken, setToken } from "@/api/token-service";
 import { USER_ROLE } from "@/lib/const";
@@ -18,6 +19,7 @@ const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 const roleFetchers: Record<string, (token: string) => Promise<any>> = {
     [USER_ROLE.ADMIN]: getAdmin,
     [USER_ROLE.PACIENTE]: getPaciente,
+    [USER_ROLE.ESPECIALISTA]: getEspecialista,
 };
 
 const AuthProvider = ({

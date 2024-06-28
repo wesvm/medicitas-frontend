@@ -8,7 +8,7 @@ import unam_logo from "@/assets/logo_unam.png"
 
 import { PasswordInput } from "@/components/password-input"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import { LoginInput } from "@/components/login-input"
 
 export const RecoveryPassword = () => {
 
@@ -23,6 +23,7 @@ export const RecoveryPassword = () => {
         const password = formData.get("password") as string;
         const password_confirmation = formData.get("confirmPassword") as string;
 
+        setLoading(true);
         const promise = resetPassword(token, password, password_confirmation)
             .then((res) => {
                 navigate('/');
@@ -60,7 +61,7 @@ export const RecoveryPassword = () => {
                 <form className="grid gap-2" onSubmit={onSubmit}>
                     <div>
                         <label htmlFor="token" className="text-xs">Token: </label>
-                        <Input id="token" name="token" placeholder="123123-123546" type="text"
+                        <LoginInput id="token" name="token" placeholder="123123-123546" type="text"
                             disabled={loading} />
                     </div>
 
