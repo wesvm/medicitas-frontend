@@ -22,7 +22,7 @@ export const registrarEspecialista = async (
 ): Promise<IMessageResponse> => {
     
     const token = getToken();
-    const response = await fetch(`${URL}/admin/agregarEspecialista`, {
+    const response = await fetch(`${URL}/especialista/agregarEspecialista`, {
         method: 'POST',
         headers: {
             'Authorization': `Bearer ${token}`,

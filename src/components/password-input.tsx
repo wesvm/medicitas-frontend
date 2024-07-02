@@ -1,9 +1,13 @@
 import { Input, InputProps } from "@/components/ui/input";
 
 import { Eye, EyeOff } from "lucide-react";
-import { useState } from "react";
+import { ForwardedRef, forwardRef, useState } from "react";
 
-export const PasswordInput = ({ ...props }: InputProps) => {
+interface PasswordInputProps extends InputProps {
+    ref?: ForwardedRef<HTMLInputElement>;
+}
+
+export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>((props, ref) => {
 
     const [showPassword, setShowPassword] = useState(false);
 
@@ -14,6 +18,7 @@ export const PasswordInput = ({ ...props }: InputProps) => {
     return (
         <div className="relative">
             <Input
+                ref={ref}
                 className="pr-9 h-8 rounded-full bg-slate-100 focus-visible:ring-slate-20"
                 type={showPassword ? "text" : "password"}
                 {...props}
@@ -31,4 +36,4 @@ export const PasswordInput = ({ ...props }: InputProps) => {
             )}
         </div>
     )
-}
+})

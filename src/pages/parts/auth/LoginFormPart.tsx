@@ -16,29 +16,35 @@ export const LoginForm = () => {
 
     const { logIn } = useAuth();
 
-    const onSubmit = async () => {
-        try {
-            setLoading(true);
-            await logIn(dni, password);
-            toast.success("Login successful!");
-            navigate('/dashboard')
-        } catch (err) {
-            if ((err as any).status === 401)
-                throw new Error("Login failed..");
+    const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
 
-            toast.error("Bad credentials..");
-            throw err;
-        } finally {
-            setLoading(false);
-        }
+        setLoading(true);
+        const promise = logIn(dni, password)
+            .then(() => navigate('/dashboard'))
+            .catch((err) => {
+                throw err
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+
+        toast.promise(promise, {
+            loading: 'Cargando',
+            success: 'Ingresando!',
+            error: 'Credenciales incorrectas.'
+        });
     }
 
     return (
-        <form className="grid gap-4">
+        <form className="grid gap-4" onSubmit={onSubmit}>
             <label htmlFor="dni" className="text-xs">
                 <span className="text-xs">Username:</span>
                 <LoginInput id="dni" name="dni" placeholder="76543210" type="text"
                     onChange={(e) => setDni(e.target.value)}
+                    required
+                    minLength={8}
+                    maxLength={8}
                     disabled={loading} />
             </label>
 
@@ -46,10 +52,11 @@ export const LoginForm = () => {
                 <span className="text-xs">Contraseña: </span>
                 <PasswordInput id="password" name="password" placeholder="******"
                     onChange={(e) => setPassword(e.target.value)}
+                    required
                     disabled={loading} />
             </label>
 
-            <Button variant="blue" type="submit" onClick={onSubmit} disabled={loading}>
+            <Button variant="blue" type="submit" disabled={loading}>
                 Ingresar
             </Button>
         </form>

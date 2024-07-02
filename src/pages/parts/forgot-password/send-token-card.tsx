@@ -17,17 +17,16 @@ export const SendTokenCard = ({ setRecovery }: SendTokenCardProps) => {
     const [loading, setLoading] = useState(false);
     const [dni, setDni] = useState("");
 
-    const handleSubmit = async () => {
-        setLoading(true);
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
 
+        setLoading(true);
         const promise = forgotPassword(dni)
             .then((res) => {
                 setRecovery(true);
                 return res;
             })
             .catch((err) => {
-                if ((err as any).status === 422)
-                    throw new Error("Reset password failed...");
                 throw err;
             })
             .finally(() => {
@@ -39,7 +38,7 @@ export const SendTokenCard = ({ setRecovery }: SendTokenCardProps) => {
             success: (res) => {
                 return `${res.message}`;
             },
-            error: 'Ingrese un DNI válido..'
+            error: 'Ingrese un DNI válido.'
         });
     }
 
@@ -54,17 +53,18 @@ export const SendTokenCard = ({ setRecovery }: SendTokenCardProps) => {
                     <img src={unam_logo} alt="logo unam" className="size-24 mx-auto" />
                     <h2 className="text-lg text-center font-semibold">Recuperar Contraseña</h2>
                 </header>
-                <form className="grid gap-4">
+                <form className="grid gap-4" onSubmit={handleSubmit}>
                     <div>
                         <label htmlFor="dni" className="text-xs">Usuario (DNI): </label>
                         <LoginInput id="dni" name="dni" placeholder="76543210" type="text"
                             onChange={(e) => setDni(e.target.value)}
+                            required
+                            minLength={8}
+                            maxLength={8}
                             disabled={loading} />
                     </div>
 
-                    <Button variant="blue" className="md:w-80" type="submit"
-                        onClick={handleSubmit} disabled={loading}
-                    >
+                    <Button variant="blue" className="md:w-80" type="submit" disabled={loading}>
                         Obtener Token de Recuperacion
                     </Button>
                 </form>

@@ -1,6 +1,10 @@
 import { ColumnDef } from "@tanstack/react-table"
 
-export const columns: ColumnDef<PacienteData>[] = [
+export const columns: ColumnDef<PacienteDataResponse>[] = [
+    {
+        accessorKey: "dni",
+        header: "DNI",
+    },
     {
         accessorKey: "nombres",
         header: "Nombres",
@@ -10,19 +14,23 @@ export const columns: ColumnDef<PacienteData>[] = [
         header: "Apellidos",
     },
     {
+        accessorKey: "email",
+        header: "Correo",
+    },
+    {
         accessorKey: "telefono",
         header: "Telefono",
     },
     {
-        accessorKey: "escuela_profesional",
-        header: "Escuela",
+        accessorKey: "escuelaProfesional",
+        header: "Escuela Profesional",
     },
     {
         accessorKey: "ocupacion",
         header: "Ocupacion",
     },
     {
-        accessorKey: "tipo_seguro",
+        accessorKey: "tipoSeguro",
         header: "Tipo de Seguro",
     },
 ]

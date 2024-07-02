@@ -23,7 +23,7 @@ const pacienteRoutes = [
     {
         icon: CalendarSearch,
         label: "Mis Citas",
-        href: "paciente-1",
+        href: "paciente",
         element: (<div className="p-4">estas son mis citas</div>)
     },
 ];

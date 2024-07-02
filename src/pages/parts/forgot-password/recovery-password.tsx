@@ -1,5 +1,5 @@
 import { resetPassword } from "@/api/auth"
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { toast } from "sonner"
 import { useNavigate } from "react-router-dom"
 
@@ -14,6 +14,18 @@ export const RecoveryPassword = () => {
 
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
+    const passwordRef = useRef<HTMLInputElement>(null);
+    const confirmPasswordRef = useRef<HTMLInputElement>(null);
+
+    const validatePassword = () => {
+        if (passwordRef.current && confirmPasswordRef.current) {
+            if (passwordRef.current.value !== confirmPasswordRef.current.value) {
+                confirmPasswordRef.current.setCustomValidity("Passwords Don't Match");
+            } else {
+                confirmPasswordRef.current.setCustomValidity('');
+            }
+        }
+    }
 
     const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
@@ -30,8 +42,6 @@ export const RecoveryPassword = () => {
                 return res;
             })
             .catch((err) => {
-                if ((err as any).status === 422)
-                    throw new Error("Reset password failed...");
                 throw err;
             })
             .finally(() => {
@@ -43,7 +53,7 @@ export const RecoveryPassword = () => {
             success: (res) => {
                 return `${res.message}`;
             },
-            error: 'Datos invalidos..'
+            error: 'Datos invalidos..',
         });
     }
 
@@ -62,18 +72,25 @@ export const RecoveryPassword = () => {
                     <div>
                         <label htmlFor="token" className="text-xs">Token: </label>
                         <LoginInput id="token" name="token" placeholder="123123-123546" type="text"
+                            required
                             disabled={loading} />
                     </div>
 
                     <div>
                         <label htmlFor="password" className="text-xs">Ingrese la nueva contraseña: </label>
                         <PasswordInput id="password" name="password" placeholder="******"
+                            ref={passwordRef}
+                            onChange={validatePassword}
+                            required
                             disabled={loading} />
                     </div>
 
                     <div>
                         <label htmlFor="confirmPassword" className="text-xs">Ingrese la nueva contraseña nuevamente: </label>
                         <PasswordInput id="confirmPassword" name="confirmPassword" placeholder="******"
+                            ref={confirmPasswordRef}
+                            onKeyUp={validatePassword}
+                            required
                             disabled={loading} />
                     </div>
 

@@ -25,7 +25,7 @@ export const getAllEspecialistas = async (): Promise<EspecialistaData[]> => {
 
     const token = getToken();
 
-    const response = await fetch(`${URL}/obtenerEspecialistas`, {
+    const response = await fetch(`${URL}/especialista/obtenerEspecialistas`, {
         headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'

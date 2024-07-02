@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 
 export const usePacientesList = () => {
 
-    const { status, data } = useQuery({
+    const { status, data, refetch } = useQuery({
         queryKey: ['pacientesList'],
         queryFn: () => getAllPacientes(),
         refetchOnMount: false,
@@ -13,7 +13,8 @@ export const usePacientesList = () => {
 
     return {
         status,
-        pacienteslist: data ?? []
+        pacienteslist: data ?? [],
+        refetch
     };
 }
 
