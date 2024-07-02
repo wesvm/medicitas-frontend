@@ -32,22 +32,17 @@ const AuthProvider = ({
     const removeAccount = useAuthStore((s) => s.removeAccount)
 
     const logIn = async (dni: string, password: string) => {
-        try {
-            const res = await signIn(dni, password);
-            setToken(res.access_token);
+        const res = await signIn(dni, password);
+        setToken(res.access_token);
 
-            const fetchUser = roleFetchers[res.account.rol];
-            const user = await fetchUser(res.access_token);
+        const fetchUser = roleFetchers[res.account.rol];
+        const user = await fetchUser(res.access_token);
 
-            const profileData: AccountWithProfile = {
-                account: res.account,
-                user
-            };
-            setAccount(profileData);
-        } catch (error) {
-            console.error(error);
-            throw new Error("Login failed");
-        }
+        const profileData: AccountWithProfile = {
+            account: res.account,
+            user
+        };
+        setAccount(profileData);
     };
 
     const logOut = () => {

@@ -4,20 +4,6 @@ interface UserData{
     rol: string;
 }
 
-interface PacienteData{
-    nombres: string;
-    apellidos: string;
-    edad: string;
-    fecha_nacimiento: string;
-    lugar_nacimiento: string;
-    domicilio: string;
-    telefono: string;
-    escuela_profesional: string;
-    ocupacion: string | null;
-    tipo_seguro: string;
-    telefono_emergencia: string | null;
-}
-
 interface AdminData{
     nombres: string;
     apellidos: string;

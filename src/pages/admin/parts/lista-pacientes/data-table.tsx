@@ -48,15 +48,16 @@ export function DataTable<TData, TValue>({
 
     return (
         <section>
-            <div className="flex items-center py-4">
+            <div className="flex items-center justify-between space-x-2 py-4">
                 <Input
-                    placeholder="Buscar por nombres..."
+                    placeholder="Buscar por nombres.."
                     value={(table.getColumn("nombres")?.getFilterValue() as string) ?? ""}
                     onChange={(event) =>
                         table.getColumn("nombres")?.setFilterValue(event.target.value)
                     }
                     className="max-w-sm"
                 />
+                {/* <AgregarPacientePart /> */}
             </div>
             <div className="rounded-md border">
                 <Table>
