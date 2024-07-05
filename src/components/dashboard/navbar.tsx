@@ -7,12 +7,15 @@ import { Button } from "@/components/ui/button";
 
 import unam_logo from "@/assets/logo-unam-white.png"
 import { useAuth } from "@/setup/AuthContext";
+import { useQueryClient } from "@tanstack/react-query";
 
 export const Navbar = () => {
     const navigate = useNavigate();
     const { logOut, profile } = useAuth();
+    const queryClient = useQueryClient();
 
     const handleLogout = () => {
+        queryClient.clear();
         logOut();
         navigate('/');
     }
