@@ -3,6 +3,8 @@ import { useAuth } from "../AuthContext";
 import { USER_ROLE } from "@/lib/const";
 import { ListPacientesPage } from "@/pages/admin/ListPacientesPage";
 import { ListEspecialistasPage } from "@/pages/admin/ListEspecialistasPage";
+import { PacienteCitasPage } from "@/pages/paciente/PacienteCitasPage";
+import { EspecialistaCitasPage } from "@/pages/especialista/EspecialistaCitasPage";
 
 const adminRoutes = [
     {
@@ -23,8 +25,8 @@ const pacienteRoutes = [
     {
         icon: CalendarSearch,
         label: "Mis Citas",
-        href: "paciente",
-        element: (<div className="p-4">estas son mis citas</div>)
+        href: "citas",
+        element: (<PacienteCitasPage />)
     },
 ];
 
@@ -34,6 +36,12 @@ const especialistaRoutes = [
         label: "Pacientes",
         href: "pacientes",
         element: (<ListPacientesPage />)
+    },
+    {
+        icon: CalendarSearch,
+        label: "Citas",
+        href: "citas",
+        element: (<EspecialistaCitasPage />)
     },
 ];
 
