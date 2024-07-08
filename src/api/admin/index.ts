@@ -31,10 +31,11 @@ export const registrarEspecialista = async (
         body: JSON.stringify(especialista)
     });
 
+    const data: IMessageResponse = await response.json();
+
     if (!response.ok) {
-        throw new Error(`Failed to register especialista: ${response.statusText}`);
+        throw { status: response.status, message: data.message, errors: data.errors };
     }
 
-    const data: IMessageResponse = await response.json();
     return data;
 }

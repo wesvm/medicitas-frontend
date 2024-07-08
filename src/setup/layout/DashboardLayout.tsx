@@ -12,7 +12,7 @@ const DashboardLayout = () => {
             <div className="hidden md:flex h-full w-56 flex-col fixed mt-[80px]">
                 <Sidebar />
             </div>
-            <main className="md:pl-36 min-h-dvh pt-[80px] bg-gray-200">
+            <main className="md:pl-36 min-h-dvh pt-[80px] bg-gray-100">
                 <Outlet />
             </main>
         </div>

@@ -1,18 +1,18 @@
 import { SidebarItem } from "@/components/dashboard/sidebar-item";
-import appRoutes from "@/setup/routes";
+import appNavRoutes from "@/setup/routes";
 
 export const Sidebar = () => {
 
-    const routes = appRoutes();
+    const routes = appNavRoutes();
 
     return (
         <div className="h-full border-r flex flex-col overflow-y-auto shadow-sm md:max-w-36 bg-white">
             {routes.map((route) => (
                 <SidebarItem
-                    key={route.href}
+                    key={route.path}
                     icon={route.icon}
                     label={route.label}
-                    href={route.href}
+                    href={route.path}
                 />
             ))}
         </div>

@@ -5,6 +5,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useEspecialidadesList } from "@/hooks/useEspecialidad";
 import { useEspecialistasList } from "@/hooks/useUsersList";
 import { cn } from "@/lib/utils";
+import { useState } from "react";
+
 import { toast } from "sonner";
 
 interface AgregarEspecialistaFormProps {
@@ -17,7 +19,7 @@ interface AgregarEspecialistaFormProps {
 export const AgregarEspecialistaForm = ({ setLoading, setOpen, loading, className
 }: AgregarEspecialistaFormProps
 ) => {
-
+    const [errors, setErrors] = useState<{ [key: string]: string[] }>({});
     const { status, especialidadeslist } = useEspecialidadesList();
     const { refetch } = useEspecialistasList();
 
@@ -44,7 +46,7 @@ export const AgregarEspecialistaForm = ({ setLoading, setOpen, loading, classNam
                 return res;
             })
             .catch((err) => {
-                console.log(err)
+                setErrors(err.errors);
                 throw err;
             })
             .finally(() => {
@@ -53,40 +55,60 @@ export const AgregarEspecialistaForm = ({ setLoading, setOpen, loading, classNam
 
         toast.promise(promise, {
             loading: 'Cargando',
-            success: (res) => {
-                return `${res.message}`;
-            },
-            error: 'Verifica los campos'
+            success: (res) => `${res.message}`,
+            error: (err) => {
+                return `Error: ${err.message}`;
+            }
         });
     }
 
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const { name } = event.target;
+        const updatedErrors = { ...errors };
+        delete updatedErrors[name];
+        setErrors(updatedErrors);
+    };
+
     return (
-        <form id="addform" className={cn("grid items-start gap-4", className)} onSubmit={onSubmit}>
+        <form id="addform" className={cn("grid items-start gap-4", className)}
+            onSubmit={onSubmit}>
             <label className="grid grid-cols-4 items-center gap-2">
-                <span className="text-left">DNI:</span>
-                <Input
-                    name="dni"
-                    placeholder="dni"
-                    className="col-span-3"
-                    minLength={8}
-                    maxLength={8}
-                    required
-                    disabled={loading}
-                />
+                <span className="text-left">DNI*</span>
+                <div className="col-span-3">
+                    <Input
+                        name="dni"
+                        placeholder="dni"
+                        className={errors.dni ? 'border-red-500' : ''}
+                        minLength={8}
+                        maxLength={8}
+                        required
+                        disabled={loading}
+                        onChange={handleChange}
+                    />
+                    {errors.dni && errors.dni.map((error, index) => (
+                        <span key={index} className="text-xs text-red-500">{error}</span>
+                    ))}
+                </div>
             </label>
             <label className="grid grid-cols-4 items-center gap-2">
-                <span className="text-left">Email:</span>
-                <Input
-                    name="email"
-                    placeholder="email"
-                    required
-                    type="email"
-                    className="col-span-3"
-                    disabled={loading}
-                />
+                <span className="text-left">Email*</span>
+                <div className="col-span-3">
+                    <Input
+                        name="email"
+                        placeholder="email"
+                        required
+                        type="email"
+                        className={errors.email ? 'border-red-500' : ''}
+                        disabled={loading}
+                        onChange={handleChange}
+                    />
+                    {errors.email && errors.email.map((error, index) => (
+                        <span key={index} className=" text-xs  text-red-500">{error}</span>
+                    ))}
+                </div>
             </label>
             <label className="grid grid-cols-4 items-center gap-2">
-                <span className="text-left">Nombres:</span>
+                <span className="text-left">Nombres*</span>
                 <Input
                     name="nombres"
                     placeholder="nombres"
@@ -96,7 +118,7 @@ export const AgregarEspecialistaForm = ({ setLoading, setOpen, loading, classNam
                 />
             </label>
             <label className="grid grid-cols-4 items-center gap-2">
-                <span className="text-left">Apellidos:</span>
+                <span className="text-left">Apellidos*</span>
                 <Input
                     name="apellidos"
                     placeholder="apellidos"
@@ -106,7 +128,7 @@ export const AgregarEspecialistaForm = ({ setLoading, setOpen, loading, classNam
                 />
             </label>
             <label className="grid grid-cols-4 items-center gap-2">
-                <span className="text-left">Telefono:</span>
+                <span className="text-left">Telefono</span>
                 <Input
                     name="telefono"
                     placeholder="telefono"
@@ -115,30 +137,29 @@ export const AgregarEspecialistaForm = ({ setLoading, setOpen, loading, classNam
                 />
             </label>
             <label className="grid grid-cols-4 items-center gap-4">
-                <span className="text-left">Especialidad:</span>
+                <span className="text-left">Especialidad*</span>
                 <div className="col-span-3">
                     <Select name="especialidad_id" required disabled={loading}>
                         <SelectTrigger>
                             <SelectValue placeholder="Selecciona una especialidad" />
                         </SelectTrigger>
                         <SelectContent>
-                            {
-                                status === 'pending' ?
-                                    (
-                                        <div className="flex items-center justify-center py-2">
-                                            <LoadingSpin />
-                                        </div>
-                                    ) : (
-                                        especialidadeslist.map((especialidad) => (
-                                            <SelectItem
-                                                key={especialidad.id}
-                                                value={especialidad.id.toString()}
-                                            >
-                                                {especialidad.nombre}
-                                            </SelectItem>
-                                        ))
+                            {status === 'pending' ?
+                                (
+                                    <div className="flex items-center justify-center py-2">
+                                        <LoadingSpin />
+                                    </div>
+                                ) : (
+                                    especialidadeslist.map((especialidad) => (
+                                        <SelectItem
+                                            key={especialidad.id}
+                                            value={especialidad.id.toString()}
+                                        >
+                                            {especialidad.nombre}
+                                        </SelectItem>
+                                    ))
 
-                                    )
+                                )
                             }
                         </SelectContent>
                     </Select>

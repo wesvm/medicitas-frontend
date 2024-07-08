@@ -1,12 +1,11 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
-import { useAuth } from "./AuthContext";
+import { useAuth } from "@/setup/AuthContext";
 
-interface ProtectedRoute {
-    children?: React.ReactNode;
+interface AuthGuardProps {
+    children: React.ReactNode;
 }
 
-const ProtectedRoute = ({ children }: ProtectedRoute) => {
-
+const AuthGuard = ({ children }: AuthGuardProps) => {
     const { isUserAuthenticated, logOut } = useAuth();
     const location = useLocation();
 
@@ -18,4 +17,4 @@ const ProtectedRoute = ({ children }: ProtectedRoute) => {
     return children ? <>{children}</> : <Outlet />;
 }
 
-export default ProtectedRoute;
+export default AuthGuard;

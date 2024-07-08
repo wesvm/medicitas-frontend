@@ -29,7 +29,6 @@ export function AñadirEspecialistaDialog() {
     const [loading, setLoading] = useState(false);
     const isDesktop = useMediaQuery("(min-width: 768px)")
 
-
     if (isDesktop) {
         return (
             <Dialog open={open} onOpenChange={setOpen}>
