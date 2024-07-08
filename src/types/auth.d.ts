@@ -16,7 +16,3 @@ interface AuthResponse {
     token_type: string;
     expires_in: number;
 }
-
-interface IMessageResponse {
-    message: string;
-}

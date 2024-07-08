@@ -1,14 +1,21 @@
+import { Card } from "@/components/card"
 import { ListarPacientesPart } from "./parts/lista-pacientes"
 
-export const ListPacientesPage = () => {
+const ListPacientesPage = () => {
     return (
         <div className="p-4">
-            <section className="p-4 bg-white mb-4 rounded-lg">
-                <h1 className="font-bold text-2xl">Lista de Pacientes</h1>
+            <section className="mb-4">
+                <Card>
+                    <h1 className="font-bold text-2xl">Lista de Pacientes</h1>
+                </Card>
             </section>
-            <section className="p-4 bg-white rounded-lg">
-                <ListarPacientesPart />
+            <section>
+                <Card>
+                    <ListarPacientesPart />
+                </Card>
             </section>
         </div>
     )
 }
+
+export default ListPacientesPage;

@@ -38,8 +38,7 @@ const messages = {
     showMore: (total: any) => `+${total} más`,
 };
 
-export const PacienteCitasPage = () => {
-
+const PacienteCitasPage = () => {
     const { status, citasPaciente, refetch } = useCitasPacientes();
     const [open, setOpen] = useState(false);
     const [openCrearCita, setOpenCrearCita] = useState(false);
@@ -104,3 +103,5 @@ export const PacienteCitasPage = () => {
         </div>
     )
 }
+
+export default PacienteCitasPage;

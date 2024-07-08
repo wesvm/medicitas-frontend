@@ -1,14 +1,21 @@
+import { Card } from "@/components/card"
 import { ListarEspecialistasPart } from "./parts/lista-especialistas"
 
-export const ListEspecialistasPage = () => {
+const ListEspecialistasPage = () => {
     return (
         <div className="p-4">
-            <section className="p-4 bg-white mb-4 rounded-lg">
-                <h1 className="font-bold text-2xl">Lista de Especialistas</h1>
+            <section className="mb-4">
+                <Card>
+                    <h1 className="font-bold text-2xl">Lista de Especialistas</h1>
+                </Card>
+            </section >
+            <section>
+                <Card>
+                    <ListarEspecialistasPart />
+                </Card>
             </section>
-            <section className="p-4 bg-white rounded-lg">
-                <ListarEspecialistasPart />
-            </section>
-        </div>
+        </div >
     )
 }
+
+export default ListEspecialistasPage;

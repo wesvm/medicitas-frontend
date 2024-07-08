@@ -1,6 +1,6 @@
 import { useAuthStore } from "@/store/auth";
 
-export const WelcomePage = () => {
+const WelcomePage = () => {
 
     const user = useAuthStore((s) => s.account);
 
@@ -12,3 +12,5 @@ export const WelcomePage = () => {
         </div>
     )
 }
+
+export default WelcomePage;

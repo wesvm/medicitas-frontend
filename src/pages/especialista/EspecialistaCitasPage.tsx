@@ -35,7 +35,7 @@ const messages = {
     showMore: (total: any) => `+${total} más`,
 };
 
-export const EspecialistaCitasPage = () => {
+const EspecialistaCitasPage = () => {
 
     const { status, citasEspecialista } = useCitasEspecialista();
 
@@ -74,3 +74,5 @@ export const EspecialistaCitasPage = () => {
         </div>
     )
 }
+
+export default EspecialistaCitasPage;

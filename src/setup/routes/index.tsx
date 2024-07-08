@@ -1,67 +1,55 @@
-import { CalendarSearch, User, Users } from "lucide-react";
-import { useAuth } from "../AuthContext";
 import { USER_ROLE } from "@/lib/const";
-import { ListPacientesPage } from "@/pages/admin/ListPacientesPage";
-import { ListEspecialistasPage } from "@/pages/admin/ListEspecialistasPage";
-import { PacienteCitasPage } from "@/pages/paciente/PacienteCitasPage";
-import { EspecialistaCitasPage } from "@/pages/especialista/EspecialistaCitasPage";
+import { Fragment, LazyExoticComponent, Suspense } from "react";
+import { Route, Outlet } from "react-router-dom";
+import { useAuth } from "../AuthContext";
+import { adminNavRoutes } from "./admin";
+import { pacientesNavRoutes } from "./paciente";
+import { especialistaNavRoutes } from "./especialista";
 
-const adminRoutes = [
-    {
-        icon: User,
-        label: "Pacientes",
-        href: "pacientes",
-        element: (<ListPacientesPage />)
-    },
-    {
-        icon: Users,
-        label: "Especialistas",
-        href: "especialistas",
-        element: (<ListEspecialistasPage />)
-    },
-];
+export interface RouteProps {
+    path?: string;
+    element?: LazyExoticComponent<() => JSX.Element> | null;
+    layout?: LazyExoticComponent<(props: { children: React.ReactNode }) => JSX.Element> | null;
+    guard?: LazyExoticComponent<(props: { children: React.ReactNode }) => JSX.Element> | null;
+    children?: RouteProps[];
+}
 
-const pacienteRoutes = [
-    {
-        icon: CalendarSearch,
-        label: "Mis Citas",
-        href: "citas",
-        element: (<PacienteCitasPage />)
-    },
-];
+export const renderRoutes = (routes: RouteProps[]) => {
+    return routes.map((route, index) => {
+        const Component = route.element || Fragment;
+        const Layout = route.layout || Fragment;
+        const Guard = route.guard || Fragment;
+        return (
+            <Route
+                key={index}
+                path={route.path}
+                element={
+                    <Suspense fallback={<h1>Loading...</h1>}>
+                        <Guard>
+                            <Layout>{route.children ? <Outlet /> : <Component />}</Layout>
+                        </Guard>
+                    </Suspense>
+                }
+            >
+                {route.children && renderRoutes(route.children)}
+            </Route>
+        );
+    });
+}
 
-const especialistaRoutes = [
-    {
-        icon: User,
-        label: "Pacientes",
-        href: "pacientes",
-        element: (<ListPacientesPage />)
-    },
-    {
-        icon: CalendarSearch,
-        label: "Citas",
-        href: "citas",
-        element: (<EspecialistaCitasPage />)
-    },
-];
-
-const appRoutes = () => {
+const appNavRoutes = () => {
     const { profile } = useAuth();
 
-    const getRoutesForRole = () => {
-        switch (profile?.account.rol) {
-            case USER_ROLE.ADMIN:
-                return adminRoutes;
-            case USER_ROLE.PACIENTE:
-                return pacienteRoutes;
-            case USER_ROLE.ESPECIALISTA:
-                return especialistaRoutes;
-            default:
-                return [];
-        }
-    };
-
-    return getRoutesForRole();
+    switch (profile?.account.rol) {
+        case USER_ROLE.ADMIN:
+            return adminNavRoutes;
+        case USER_ROLE.PACIENTE:
+            return pacientesNavRoutes;
+        case USER_ROLE.ESPECIALISTA:
+            return especialistaNavRoutes;
+        default:
+            return [];
+    }
 };
 
-export default appRoutes;
+export default appNavRoutes;
