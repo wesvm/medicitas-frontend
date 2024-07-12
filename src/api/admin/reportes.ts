@@ -1,7 +1,7 @@
 import { getToken } from "@/api/token-service";
 const URL = import.meta.env.VITE_API_BASE_URL;
 
-export const getConteoCitas = async (request: IConteoCitasRequest): Promise<IConteoCitasResponse> => {
+export const getConteoCitas = async (request?: IConteoCitasRequest): Promise<IConteoCitasResponse> => {
     const token = getToken();
     const response = await fetch(`${URL}/reportes/conteoCitas`, {
         method: 'POST',
