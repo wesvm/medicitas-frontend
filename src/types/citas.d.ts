@@ -14,3 +14,30 @@ interface IRegistrarPacienteCita{
     motivo: string;
     especialista_id: number;
 }
+
+interface EspecialidadConteoData {
+    nombre: string;
+    total: number;
+}
+
+interface DiasConteoData {
+    dia: string;
+    especialidades: EspecialidadConteoData[];
+}
+
+type IConteoCitasResponse = {
+    fechaInicio: string | null;
+    fechaFin: string | null;
+    citas: {
+        total: number;
+        estudiantes: number;
+        noEstudiantes: number;
+        especialidades: EspecialidadConteoData[] | [];
+    };
+    dias: DiasConteoData[] | [];
+};
+
+interface IConteoCitasRequest {
+    fechaInicio:  string | Date | undefined;
+    fechaFin: string | Date | undefined;
+}
