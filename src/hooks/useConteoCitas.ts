@@ -1,7 +1,7 @@
 import { getConteoCitas } from "@/api/admin/reportes";
 import { useQuery } from "@tanstack/react-query";
 
-export const useConteoCitas = (request: IConteoCitasRequest) => {
+export const useConteoCitas = (request?: IConteoCitasRequest) => {
 
     const { status, data } = useQuery({
         queryKey: ['conteoCitas', request],

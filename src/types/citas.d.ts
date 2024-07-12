@@ -15,14 +15,14 @@ interface IRegistrarPacienteCita{
     especialista_id: number;
 }
 
-interface EspecialidadData {
+interface EspecialidadConteoData {
     nombre: string;
     total: number;
 }
 
-interface DiasData {
+interface DiasConteoData {
     dia: string;
-    especialidades: EspecialidadData[];
+    especialidades: EspecialidadConteoData[];
 }
 
 type IConteoCitasResponse = {
@@ -32,12 +32,12 @@ type IConteoCitasResponse = {
         total: number;
         estudiantes: number;
         noEstudiantes: number;
-        especialidades: EspecialidadData[] | [];
+        especialidades: EspecialidadConteoData[] | [];
     };
-    dias: DiasData[] | [];
+    dias: DiasConteoData[] | [];
 };
 
 interface IConteoCitasRequest {
-    fechaInicio: string | Date | undefined;
+    fechaInicio:  string | Date | undefined;
     fechaFin: string | Date | undefined;
 }
