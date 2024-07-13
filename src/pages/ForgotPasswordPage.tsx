@@ -2,7 +2,7 @@ import { useState } from "react"
 import { SendTokenCard } from "@/pages/parts/forgot-password/send-token-card"
 import { RecoveryPassword } from "@/pages/parts/forgot-password/recovery-password";
 
-export const ForgotPasswordPage = () => {
+const ForgotPasswordPage = () => {
 
     const [recovery, setRecovery] = useState(false);
 
@@ -17,3 +17,5 @@ export const ForgotPasswordPage = () => {
         </main>
     )
 }
+
+export default ForgotPasswordPage;

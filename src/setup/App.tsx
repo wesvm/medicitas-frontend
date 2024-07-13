@@ -42,6 +42,10 @@ function App() {
             ],
         },
         {
+            path: "/recuperar-contraseña",
+            element: lazy(async () => await import("@/pages/ForgotPasswordPage")),
+        },
+        {
             path: "*",
             element: lazy(async () => await import("@/pages/NotFoundPage")),
         }
