@@ -23,11 +23,11 @@ interface IRegistrarPaciente {
     fecha_nacimiento: string;
     lugar_nacimiento: string;
     domicilio: string;
-    telefono?: string;
-    escuela_profesional?: string;
-    ocupacion?: string;
+    telefono?: string | null;
+    escuela_profesional?: string | null;
+    ocupacion?: string | null;
     tipo_seguro: string;
-    telefono_emergencia?: string;
+    telefono_emergencia?: string | null;
 }
 
 interface PacienteAuthR {
