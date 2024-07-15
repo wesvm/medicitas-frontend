@@ -30,18 +30,18 @@ export const AgregarPacienteForm = () => {
 
         const formData = new FormData(event.currentTarget);
         const form: IRegistrarPaciente = {
-            dni: formData.get("dni") as string,
-            email: formData.get("email") as string,
-            nombres: formData.get("nombres") as string,
-            apellidos: formData.get("apellidos") as string,
-            telefono: formData.get("telefono") as string,
-            fecha_nacimiento: formData.get("fecha_nacimiento") as string,
-            lugar_nacimiento: formData.get("lugar_nacimiento") as string,
-            domicilio: formData.get("domicilio") as string,
-            escuela_profesional: formData.get("escuela_profesional") as string,
-            ocupacion: formData.get("ocupacion") as string,
-            tipo_seguro: formData.get("tipo_seguro") as string,
-            telefono_emergencia: formData.get("telefono_emergencia") as string
+            dni: formData.get("dni") as string ?? "",
+            email: formData.get("email") as string ?? "",
+            nombres: formData.get("nombres") as string ?? "",
+            apellidos: formData.get("apellidos") as string ?? "",
+            telefono: formData.get("telefono") as string ?? "",
+            fecha_nacimiento: formData.get("fecha_nacimiento") as string ?? "",
+            lugar_nacimiento: formData.get("lugar_nacimiento") as string ?? "",
+            domicilio: formData.get("domicilio") as string ?? "",
+            escuela_profesional: formData.get("escuela_profesional") as string ?? "",
+            ocupacion: formData.get("ocupacion") as string ?? "",
+            tipo_seguro: formData.get("tipo_seguro") as string ?? "",
+            telefono_emergencia: formData.get("telefono_emergencia") as string ?? ""
         }
 
         setLoading(true);
