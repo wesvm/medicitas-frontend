@@ -8,6 +8,7 @@ const ListPacientesPage = () => {
                 <Card>
                     <h1 className="font-bold text-2xl">Lista de Pacientes</h1>
                 </Card>
+
             </section>
             <section>
                 <Card>

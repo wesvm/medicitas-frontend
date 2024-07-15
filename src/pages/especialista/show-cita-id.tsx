@@ -8,7 +8,7 @@ import {
     DialogHeader,
     DialogTitle
 } from "@/components/ui/dialog"
-import { useCitaDetallePacientes } from "@/hooks/useCitas";
+import { useCitaDetalleEspecialista } from "@/hooks/useCitas";
 import { DialogClose } from "@radix-ui/react-dialog";
 
 interface ShowDialogCitaIdProps {
@@ -19,7 +19,7 @@ interface ShowDialogCitaIdProps {
 
 export const ShowDialogCitaId = ({ open, setOpen, citaId }: ShowDialogCitaIdProps) => {
 
-    const { status, citaDetallePaciente } = useCitaDetallePacientes(citaId);
+    const { status, cita } = useCitaDetalleEspecialista(citaId);
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
@@ -38,19 +38,29 @@ export const ShowDialogCitaId = ({ open, setOpen, citaId }: ShowDialogCitaIdProp
                     :
                     <>
                         <DialogHeader>
-                            <DialogTitle>{citaDetallePaciente?.motivo}</DialogTitle>
+                            <DialogTitle>{cita?.motivo}</DialogTitle>
                             <DialogDescription>Descripcion de la cita:</DialogDescription>
                         </DialogHeader>
                         <div>
-                            <p><strong>Fecha:</strong> {citaDetallePaciente?.fecha}</p>
-                            <p><strong>Hora:</strong> {citaDetallePaciente?.hora}</p>
-                            <p><strong>Estado:</strong> {citaDetallePaciente?.estado}</p>
+                            <p><strong>Fecha:</strong> {cita?.fecha}</p>
+                            <p><strong>Hora:</strong> {cita?.hora}</p>
+                            <p><strong>Estado:</strong> {cita?.estado}</p>
                         </div>
                         <div>
-                            <h3 className="text-lg font-semibold">Especialista</h3>
-                            <p><strong>Nombre:</strong> {citaDetallePaciente?.especialista.nombres} {citaDetallePaciente?.especialista.apellidos}</p>
-                            <p><strong>Teléfono:</strong> {citaDetallePaciente?.especialista.telefono}</p>
-                            <p><strong>Especialidad:</strong> {citaDetallePaciente?.especialista.especialidad}</p>
+                            <h3 className="text-lg font-semibold">Datos del paciente: </h3>
+                            <p><strong>Nombre:</strong> {cita?.paciente.nombres} {cita?.paciente.apellidos}</p>
+                            <p><strong>Teléfono:</strong> {cita?.paciente.telefono}</p>
+                            <p><strong>Tipo de Seguro:</strong> {cita?.paciente.tipoSeguro}</p>
+                            <p><strong>Fecha de Nacimiento:</strong> {cita?.paciente.fechaNacimiento}</p>
+                            <p><strong>Lugar de Nacimiento:</strong> {cita?.paciente.lugarNacimiento}</p>
+                            <p><strong>Domicilio:</strong> {cita?.paciente.domicilio}</p>
+                            <p><strong>Teléfono de Emergencia:</strong> {cita?.paciente.telefonoEmergencia}</p>
+                            {cita?.paciente.escuelaProfesional &&
+                                <p><strong>Escuela Profesional:</strong> {cita.paciente.escuelaProfesional}</p>
+                            }
+                            {cita?.paciente.ocupacion &&
+                                <p><strong>Ocupación:</strong> {cita.paciente.ocupacion}</p>
+                            }
                         </div>
                         <DialogFooter>
                             <DialogClose asChild>

@@ -1,7 +1,7 @@
 import { usePacientesList } from "@/hooks/useUsersList"
 import { columns } from "./columns"
-import { DataTable } from "./data-table"
 import { AdminListPageLoading } from "../loading";
+import { DataTable } from "./data-table";
 
 export const ListarPacientesPart = () => {
 

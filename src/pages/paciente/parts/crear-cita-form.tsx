@@ -47,7 +47,7 @@ export const CrearCitaForm = ({ startDate, setLoading, setOpen, refetch, loading
 
         const formData = new FormData(event.currentTarget);
         const form: IRegistrarPacienteCita = {
-            fecha: date,
+            fecha: formData.get("fecha") as string || date,
             hora: formData.get("hora") as string,
             motivo: formData.get("motivo") as string,
             especialista_id: parseInt(formData.get("especialista_id") as string, 10),

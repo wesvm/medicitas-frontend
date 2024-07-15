@@ -1,7 +1,7 @@
-interface EspecialistaData{
-    nombres: string;
-    apellidos: string;
-    telefono: string;
+interface EspecialistaData {
+	nombres: string;
+	apellidos: string;
+	telefono: string;
 }
 
 interface IRegistrarEspecialista {
@@ -10,7 +10,7 @@ interface IRegistrarEspecialista {
 	email: string,
 	nombres: string,
 	apellidos: string,
-    telefono: string | null,
+	telefono: string | null,
 	especialidad_id: string,
 	horario_atencion_id: string
 }

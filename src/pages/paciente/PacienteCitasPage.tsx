@@ -40,9 +40,9 @@ const messages = {
 
 const PacienteCitasPage = () => {
     const { status, citasPaciente, refetch } = useCitasPacientes();
-    const [open, setOpen] = useState(false);
+    const [openDetalleCita, setOpenDetalleCita] = useState(false);
     const [openCrearCita, setOpenCrearCita] = useState(false);
-    const [title, setTitle] = useState('');
+    const [citaId, setCitaId] = useState(0);
     const [startDate, setStartDate] = useState(new Date());
 
     if (status === 'pending') return <div>Loading..</div>;
@@ -50,7 +50,7 @@ const PacienteCitasPage = () => {
     const eventos = citasPaciente.map(cita => {
         const horaInicio = new Date(`${cita.fecha}T${cita.hora}`);
         const horaFin = new Date(horaInicio);
-        horaFin.setHours(horaFin.getHours() + 2);
+        horaFin.setHours(horaFin.getHours() + 1);
 
         return {
             id: cita.id,
@@ -60,19 +60,17 @@ const PacienteCitasPage = () => {
         };
     });
 
-    const handleSelectEvent = (
-        (event: any) => {
-            setOpen(true);
-            setTitle(event.title);
-        }
-    )
-
     const handleSelectSlot = (
         ({ start }: any) => {
             setOpenCrearCita(true);
             setStartDate(start);
         }
     )
+
+    const handleSelectEvent = (event: any) => {
+        setOpenDetalleCita(true);
+        setCitaId(event.id)
+    }
 
     return (
         <div className="p-4">
@@ -93,12 +91,19 @@ const PacienteCitasPage = () => {
                         height: 800,
                     }}
                 />
-                <ShowDialogCitaId open={open} title={title} setOpen={setOpen} />
+
                 <ShowDialogCrearCita
                     setOpen={setOpenCrearCita}
                     open={openCrearCita} startDate={startDate}
                     refetch={refetch}
                 />
+                {citaId !== 0 && (
+                    <ShowDialogCitaId
+                        open={openDetalleCita}
+                        setOpen={setOpenDetalleCita}
+                        citaId={citaId}
+                    />
+                )}
             </section>
         </div>
     )

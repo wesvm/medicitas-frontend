@@ -1,10 +1,10 @@
-interface UserData{
+interface UserData {
     dni: string;
     email: string;
     rol: string;
 }
 
-interface AdminData{
+interface AdminData {
     nombres: string;
     apellidos: string;
     telefono: string;
@@ -15,4 +15,9 @@ interface AuthResponse {
     access_token: string;
     token_type: string;
     expires_in: number;
+}
+
+interface UpdateEspecialistaRequest {
+    email?: string;
+    telefono?: string,
 }

@@ -4,7 +4,7 @@ import { immer } from 'zustand/middleware/immer';
 
 export interface AccountWithProfile {
     account: UserData;
-    user: AdminData;
+    user: AdminData | PacienteAuthR | EspecialistaData;
 };
 
 interface AuthStore {

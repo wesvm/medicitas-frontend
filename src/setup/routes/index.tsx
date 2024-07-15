@@ -5,6 +5,7 @@ import { useAuth } from "../AuthContext";
 import { adminNavRoutes } from "./admin";
 import { pacientesNavRoutes } from "./paciente";
 import { especialistaNavRoutes } from "./especialista";
+import { LoadingSpinner } from "@/components/loading-spinner";
 
 export interface RouteProps {
     path?: string;
@@ -24,7 +25,7 @@ export const renderRoutes = (routes: RouteProps[]) => {
                 key={index}
                 path={route.path}
                 element={
-                    <Suspense fallback={<h1>Loading...</h1>}>
+                    <Suspense fallback={<LoadingSpinner />}>
                         <Guard>
                             <Layout>{route.children ? <Outlet /> : <Component />}</Layout>
                         </Guard>

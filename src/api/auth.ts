@@ -1,3 +1,5 @@
+import { getToken } from "@/api/token-service";
+
 const URL = import.meta.env.VITE_API_BASE_URL;
 
 export function getAuthHeaders(token: string): Record<string, string> {
@@ -12,7 +14,7 @@ export const signIn = async (dni: string, password: string): Promise<AuthRespons
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ dni,password })
+        body: JSON.stringify({ dni, password })
     });
 
     if (!response.ok) {
@@ -41,8 +43,8 @@ export const forgotPassword = async (dni: string): Promise<IMessageResponse> => 
 }
 
 export const resetPassword = async (
-    token: string, 
-    password: string, 
+    token: string,
+    password: string,
     password_confirmation: string
 ): Promise<IMessageResponse> => {
     const response = await fetch(`${URL}/password/reset`, {
@@ -55,6 +57,30 @@ export const resetPassword = async (
 
     if (!response.ok) {
         throw new Error(`Reset password error: ${response.statusText}`);
+    }
+
+    const data: IMessageResponse = await response.json();
+    return data;
+}
+
+export const changePassword = async (
+    password: string,
+    password_confirmation: string
+): Promise<IMessageResponse> => {
+
+    const token = getToken();
+
+    const response = await fetch(`${URL}/password/changePassword`, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ password, password_confirmation })
+    });
+
+    if (!response.ok) {
+        throw new Error(`Change password error: ${response.statusText}`);
     }
 
     const data: IMessageResponse = await response.json();

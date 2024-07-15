@@ -1,4 +1,4 @@
-import { FileBarChart, User, Users } from "lucide-react";
+import { Contact, FileBarChart, User, Users } from "lucide-react";
 import { RouteProps } from ".";
 import { lazy } from "react";
 
@@ -18,6 +18,11 @@ export const adminNavRoutes = [
         label: "Especialistas",
         path: "especialistas",
     },
+    {
+        icon: Contact,
+        label: "Mi perfil",
+        path: "perfil"
+    }
 ]
 
 export const adminRoutes: RouteProps = {
@@ -33,6 +38,10 @@ export const adminRoutes: RouteProps = {
         {
             path: "reportes",
             element: lazy(async () => await import("@/pages/admin/ReportesPage")),
+        },
+        {
+            path: "perfil",
+            element: lazy(async () => await import("@/pages/PerfilPage")),
         }
     ]
 };

@@ -1,5 +1,5 @@
-import { getCitasEspecialista } from "@/api/especialista/citas";
-import { getCitasPaciente } from "@/api/paciente/citas";
+import { getCitaByIdEspecialista, getCitasEspecialista } from "@/api/especialista/citas";
+import { getCitaByIdPaciente, getCitasPaciente } from "@/api/paciente/citas";
 import { useQuery } from "@tanstack/react-query";
 
 export const useCitasPacientes = () => {
@@ -18,6 +18,21 @@ export const useCitasPacientes = () => {
     };
 }
 
+export const useCitaDetallePacientes = (citaId: number) => {
+
+    const { status, data } = useQuery({
+        queryKey: ['citaDetallePaciente', citaId],
+        queryFn: () => getCitaByIdPaciente(citaId),
+        refetchOnMount: false,
+        refetchOnWindowFocus: false
+    });
+
+    return {
+        status,
+        citaDetallePaciente: data
+    };
+}
+
 export const useCitasEspecialista = () => {
 
     const { status, data } = useQuery({
@@ -30,5 +45,20 @@ export const useCitasEspecialista = () => {
     return {
         status,
         citasEspecialista: data ?? [],
+    };
+}
+
+export const useCitaDetalleEspecialista = (citaId: number) => {
+
+    const { status, data } = useQuery({
+        queryKey: ['citaDetalleEspecialista', citaId],
+        queryFn: () => getCitaByIdEspecialista(citaId),
+        refetchOnMount: false,
+        refetchOnWindowFocus: false
+    });
+
+    return {
+        status,
+        cita: data
     };
 }

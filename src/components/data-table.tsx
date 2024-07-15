@@ -8,8 +8,6 @@ import {
     getPaginationRowModel,
     getFilteredRowModel,
     useReactTable,
-    getFacetedRowModel,
-    getFacetedUniqueValues,
 } from "@tanstack/react-table"
 
 import {
@@ -22,7 +20,7 @@ import {
 } from "@/components/ui/table"
 import { DataTablePagination } from "@/components/data-table-pagination"
 import { useState } from "react"
-import { DataTableToolbar } from "./data-table-toolbar"
+import { Input } from "@/components/ui/input"
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
@@ -43,14 +41,12 @@ export function DataTable<TData, TValue>({
     const table = useReactTable({
         data,
         columns,
-        onSortingChange: setSorting,
-        onColumnFiltersChange: setColumnFilters,
         getCoreRowModel: getCoreRowModel(),
-        getFilteredRowModel: getFilteredRowModel(),
         getPaginationRowModel: getPaginationRowModel(),
+        onColumnFiltersChange: setColumnFilters,
+        getFilteredRowModel: getFilteredRowModel(),
+        onSortingChange: setSorting,
         getSortedRowModel: getSortedRowModel(),
-        getFacetedRowModel: getFacetedRowModel(),
-        getFacetedUniqueValues: getFacetedUniqueValues(),
         state: {
             columnFilters,
             sorting
@@ -59,7 +55,16 @@ export function DataTable<TData, TValue>({
 
     return (
         <section>
-            <DataTableToolbar table={table} />
+            <div className="flex items-center justify-between space-x-2 py-4">
+                <Input
+                    placeholder="Buscar por nombres.."
+                    value={(table.getColumn("nombres")?.getFilterValue() as string) ?? ""}
+                    onChange={(event) =>
+                        table.getColumn("nombres")?.setFilterValue(event.target.value)
+                    }
+                    className="max-w-sm"
+                />
+            </div>
             <div className="rounded-md border">
                 <Table>
                     <TableHeader>

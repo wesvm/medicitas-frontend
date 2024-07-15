@@ -4,6 +4,8 @@ import {
     Sheet,
     SheetClose,
     SheetContent,
+    SheetDescription,
+    SheetTitle,
     SheetTrigger
 } from "@/components/ui/sheet";
 import { useMovilSidebarSheetStore } from "@/store/utils-store";
@@ -20,6 +22,10 @@ export const MobileSidebar = () => {
                 <Menu className="text-white" />
             </SheetTrigger>
             <SheetContent side="left" className="p-0">
+                <div className="hidden">
+                    <SheetTitle />
+                    <SheetDescription />
+                </div>
                 <Sidebar />
             </SheetContent>
         </Sheet>

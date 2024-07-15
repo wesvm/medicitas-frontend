@@ -17,10 +17,30 @@ export const getAdmin = async (token: string): Promise<AdminData> => {
     return data;
 }
 
+export const updateAdmin = async (email: string, telefono: string): Promise<IMessageResponse> => {
+    const token = getToken();
+    const response = await fetch(`${URL}/admin/update`, {
+        method: 'PUT',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, telefono })
+    });
+
+    const data: IMessageResponse = await response.json();
+
+    if (!response.ok) {
+        throw { status: response.status, message: data.message, errors: data.errors };
+    }
+
+    return data;
+}
+
 export const registrarEspecialista = async (
     especialista: IRegistrarEspecialista
 ): Promise<IMessageResponse> => {
-    
+
     const token = getToken();
     const response = await fetch(`${URL}/especialista/agregarEspecialista`, {
         method: 'POST',
