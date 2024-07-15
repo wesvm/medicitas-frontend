@@ -10,6 +10,6 @@ export const ListarPacientesPart = () => {
     if (status === 'pending') return <AdminListPageLoading />;
 
     return (
-        <DataTable columns={columns} data={pacienteslist} />
+        <DataTable columns={columns} data={pacienteslist.reverse()} />
     )
 }

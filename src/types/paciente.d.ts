@@ -17,19 +17,17 @@ interface PacienteDataResponse {
 
 interface IRegistrarPaciente {
     dni: string;
-    password: string;
     email: string;
     nombres: string;
     apellidos: string;
-    edad: string;
-    fechaNacimiento: string;
-    lugarNacimiento: string;
+    fecha_nacimiento: string;
+    lugar_nacimiento: string;
     domicilio: string;
-    telefono: string;
-    escuelaProfesional: string;
-    ocupacion: string | null;
-    tipoSeguro: string;
-    telefonoEmergencia: string | null;
+    telefono?: string;
+    escuela_profesional?: string;
+    ocupacion?: string;
+    tipo_seguro: string;
+    telefono_emergencia?: string;
 }
 
 interface PacienteAuthR {

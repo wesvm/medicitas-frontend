@@ -1,7 +1,12 @@
 import { Card } from "@/components/card"
 import { ListarPacientesPart } from "./parts/lista-pacientes"
+import { usePacienteFormStore } from "@/store/utils-store";
+import { AgregarPacienteForm } from "./parts/agregar-paciente/agregar-paciente-form";
 
 const ListPacientesPage = () => {
+
+    const { open } = usePacienteFormStore();
+
     return (
         <div className="p-4">
             <section className="mb-4">
@@ -12,7 +17,11 @@ const ListPacientesPage = () => {
             </section>
             <section>
                 <Card>
-                    <ListarPacientesPart />
+                    {
+                        !open ?
+                            <ListarPacientesPart />
+                            : <AgregarPacienteForm />
+                    }
                 </Card>
             </section>
         </div>
