@@ -3,10 +3,10 @@ import { Table } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-import { ESCUELAS, SEGURO } from "@/lib/const";
+import { CITASTATUS } from "@/lib/const";
 import { X } from "lucide-react";
-import { DataTableFacetedFilter } from "./data-table-faceted-filter";
-import { Link } from "react-router-dom";
+import { DataTableFacetedFilter } from "@/pages/admin/parts/lista-pacientes/data-table-faceted-filter";
+import { useNavigate } from "react-router-dom";
 
 interface DataTableToolbarProps<TData> {
     table: Table<TData>;
@@ -16,27 +16,23 @@ export function DataTableToolbar<TData>({
     table,
 }: DataTableToolbarProps<TData>) {
     const isFiltered = table.getState().columnFilters.length > 0;
-
+    const navigate = useNavigate();
     return (
         <div className="flex flex-wrap items-center justify-between space-x-2 pb-2">
             <div className="flex flex-1 items-center space-x-2 flex-wrap">
                 <Input
-                    placeholder="Buscar por nombres.."
-                    value={(table.getColumn("nombres")?.getFilterValue() as string) ?? ""}
+                    placeholder="Buscar por fecha.."
+                    type="date"
+                    value={(table.getColumn("fecha")?.getFilterValue() as string) ?? ""}
                     onChange={(event) =>
-                        table.getColumn("nombres")?.setFilterValue(event.target.value)
+                        table.getColumn("fecha")?.setFilterValue(event.target.value)
                     }
                     className="max-w-sm"
                 />
                 <DataTableFacetedFilter
-                    column={table.getColumn("escuelaProfesional")}
-                    title="Carreras"
-                    options={ESCUELAS}
-                />
-                <DataTableFacetedFilter
-                    column={table.getColumn("tipoSeguro")}
-                    title="Seguro"
-                    options={SEGURO}
+                    column={table.getColumn("estado")}
+                    title="Estado"
+                    options={CITASTATUS}
                 />
                 {isFiltered && (
                     <Button
@@ -50,13 +46,9 @@ export function DataTableToolbar<TData>({
                 )}
             </div>
 
-            <div>
-                <Link to="nuevo">
-                    <Button>
-                        Añadir paciente
-                    </Button>
-                </Link>
-            </div>
+            <Button variant='secondary' className="w-48" onClick={() => navigate(-1)}>
+                Regresar
+            </Button>
         </div>
     );
 }

@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/dialog"
 import { useCitaDetalleEspecialista } from "@/hooks/useCitas";
 import { DialogClose } from "@radix-ui/react-dialog";
+import { useNavigate } from "react-router-dom";
 
 interface ShowDialogCitaIdProps {
     setOpen: (open: boolean) => void;
@@ -19,7 +20,12 @@ interface ShowDialogCitaIdProps {
 
 export const ShowDialogCitaId = ({ open, setOpen, citaId }: ShowDialogCitaIdProps) => {
 
+    const navigate = useNavigate();
     const { status, cita } = useCitaDetalleEspecialista(citaId);
+
+    const handleRealizarConsulta = () => {
+        navigate(`/dashboard/consultas?citaId=${cita?.id}`)
+    }
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
@@ -64,10 +70,18 @@ export const ShowDialogCitaId = ({ open, setOpen, citaId }: ShowDialogCitaIdProp
                         </div>
                         <DialogFooter>
                             <DialogClose asChild>
-                                <Button type="button" variant="default">
+                                <Button type="button" variant="secondary">
                                     Close
                                 </Button>
                             </DialogClose>
+                            {cita?.estado !== 'completado' && (
+                                <Button type="button"
+                                    onClick={handleRealizarConsulta}
+                                >
+                                    Realizar consulta
+                                </Button>
+                            )}
+
                         </DialogFooter>
                     </>
                 }

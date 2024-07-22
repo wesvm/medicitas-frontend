@@ -1,5 +1,6 @@
-import { getCitaByIdEspecialista, getCitasEspecialista } from "@/api/especialista/citas";
+import { getCitaByIdEspecialista, getCitasEspecialista, getCitasPacientesByEspecialista } from "@/api/especialista/citas";
 import { getCitaByIdPaciente, getCitasPaciente } from "@/api/paciente/citas";
+import { useRefetchStore } from "@/store/utils-store";
 import { useQuery } from "@tanstack/react-query";
 
 export const useCitasPacientes = () => {
@@ -30,6 +31,26 @@ export const useCitaDetallePacientes = (citaId: number) => {
     return {
         status,
         citaDetallePaciente: data
+    };
+}
+
+export const useCitasPacienteEspecialista = (pacienteId: string) => {
+    const { setRefetch } = useRefetchStore();
+    const { status, data, refetch } = useQuery({
+        queryKey: ['citasPacientesEspecialista', pacienteId],
+        queryFn: () => getCitasPacientesByEspecialista(pacienteId)
+            .then((res) => {
+                setRefetch(refetch);
+                return res;
+            }),
+        refetchOnMount: false,
+        refetchOnWindowFocus: false
+    });
+
+    return {
+        status,
+        citasPaciente: data ?? [],
+        refetch
     };
 }
 

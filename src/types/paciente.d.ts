@@ -1,5 +1,5 @@
 interface PacienteDataResponse {
-    id: number;
+    user_id: number;
     dni: string;
     email: string;
     nombres: string;

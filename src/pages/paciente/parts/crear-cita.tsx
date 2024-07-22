@@ -26,9 +26,16 @@ interface ShowDialogCrearCitaProps {
     open: boolean;
     startDate: Date;
     refetch: () => void;
+    paciente?: PacienteDataResponse;
 }
 
-export const ShowDialogCrearCita = ({ open, setOpen, startDate, refetch }: ShowDialogCrearCitaProps) => {
+export const ShowDialogCrearCita = ({
+    open,
+    setOpen,
+    startDate,
+    refetch,
+    paciente
+}: ShowDialogCrearCitaProps) => {
 
     const [loading, setLoading] = useState(false);
     const isDesktop = useMediaQuery("(min-width: 768px)")
@@ -38,7 +45,15 @@ export const ShowDialogCrearCita = ({ open, setOpen, startDate, refetch }: ShowD
             <Dialog open={open} onOpenChange={setOpen}>
                 <DialogContent>
                     <DialogHeader>
-                        <DialogTitle>Crear nueva cita</DialogTitle>
+                        <DialogTitle>
+                            {!paciente ?
+                                <span>Crear nueva cita</span>
+                                :
+                                <span>
+                                    Nueva cita para {paciente.nombres} {paciente.apellidos}
+                                </span>
+                            }
+                        </DialogTitle>
                         <DialogDescription>
                             Formulario para crear una nueva cita
                         </DialogDescription>
@@ -67,9 +82,17 @@ export const ShowDialogCrearCita = ({ open, setOpen, startDate, refetch }: ShowD
         <Drawer open={open} onOpenChange={setOpen}>
             <DrawerContent>
                 <DrawerHeader className="text-left">
-                    <DrawerTitle>Añadir especialista</DrawerTitle>
+                    <DrawerTitle>
+                        {!paciente ?
+                            <span>Crear nueva cita</span>
+                            :
+                            <span>
+                                Nueva cita para {paciente.nombres} {paciente.apellidos}
+                            </span>
+                        }
+                    </DrawerTitle>
                     <DrawerDescription>
-                        Ingresa los datos del especialista
+                        Formulario para crear una nueva cita
                     </DrawerDescription>
                 </DrawerHeader>
                 <CrearCitaForm

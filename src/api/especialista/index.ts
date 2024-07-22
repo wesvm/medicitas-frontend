@@ -59,3 +59,22 @@ export const getAllEspecialistas = async (): Promise<EspecialistaData[]> => {
     const data: EspecialistaData[] = await response.json();
     return data;
 }
+
+export const getPacientesXEspecialista = async (): Promise<PacienteDataResponse[]> => {
+
+    const token = getToken();
+
+    const response = await fetch(`${URL}/especialista/pacientes`, {
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        },
+    });
+
+    if (!response.ok) {
+        throw new Error(`Failed to get pacientes data list: ${response.statusText}`);
+    }
+
+    const data: PacienteDataResponse[] = await response.json();
+    return data;
+}

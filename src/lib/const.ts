@@ -4,6 +4,12 @@ export const USER_ROLE = {
     ESPECIALISTA: "especialista"
 };
 
+export const CITASTATUS = [
+    { label: "Pendiente", value: "pendiente", color: "bg-yellow-500" },
+    { label: "Completado", value: "completado", color: "bg-green-600" },
+    { label: "No asistió", value: "no asistió", color: "bg-red-500" },
+];
+
 export const SEGURO = [
     {
         label: "SIS",

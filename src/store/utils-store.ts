@@ -14,3 +14,13 @@ export const usePacienteFormStore = create<MovilSidebarSheetStore>((set) => ({
     open: false,
     setOpen: (value) => set({ open: value }),
 }))
+
+interface RefetchStore {
+    refetch: () => void;
+    setRefetch: (fn: () => void) => void;
+}
+
+export const useRefetchStore = create<RefetchStore>((set) => ({
+    refetch: () => { },
+    setRefetch: (fn) => set({ refetch: fn }),
+}));

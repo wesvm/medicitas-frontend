@@ -4,7 +4,8 @@ interface ICitasPacienteResponse {
     hora: string;
     estado: string;
     motivo: string;
-    especialista_id: string;
+    paciente_id?: string,
+    especialista_id?: string;
 }
 
 type ICitaDetallePacienteResponse = {
@@ -28,20 +29,7 @@ type ICitaDetalleEspecialistaResponse = {
     hora: string;
     estado: string;
     motivo: string;
-    paciente: {
-        user_id: number;
-        nombres: string;
-        apellidos: string;
-        edad: numberstring;
-        fechaNacimiento: string;
-        lugarNacimiento: string;
-        domicilio: string;
-        telefono: string;
-        escuelaProfesional: string | null;
-        ocupacion: string | nullstring;
-        tipoSeguro: string;
-        telefonoEmergencia: string
-    }
+    paciente: PacienteDataResponse;
 }
 
 interface IRegistrarPacienteCita {
@@ -49,6 +37,7 @@ interface IRegistrarPacienteCita {
     hora: string;
     motivo: string;
     especialista_id: number;
+    paciente_id?: number;
 }
 
 interface EspecialidadConteoData {

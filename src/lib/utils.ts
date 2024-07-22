@@ -6,15 +6,26 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export function formatDateRange (request?: IConteoCitasRequest){
-  const defaultFechaFin = new Date();
-  const defaultFechaInicio  = subDays(defaultFechaFin, 30);
+export function getCurrentDateTime() {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+  const hours = String(today.getHours()).padStart(2, '0');
+  const minutes = String(today.getMinutes()).padStart(2, '0');
 
-  if(!request?.fechaInicio){
+  return `${year}-${month}-${day}T${hours}:${minutes}:00`;
+};
+
+export function formatDateRange(request?: IConteoCitasRequest) {
+  const defaultFechaFin = new Date();
+  const defaultFechaInicio = subDays(defaultFechaFin, 30);
+
+  if (!request?.fechaInicio) {
     return `${format(defaultFechaInicio, 'LLL dd')} - ${format(defaultFechaFin, 'LLL dd, y')} `
   }
 
-  if(request.fechaFin){
+  if (request.fechaFin) {
     return `${format(request.fechaInicio, 'LLL dd')} - ${format(request.fechaFin, 'LLL dd, y')} `
   }
 

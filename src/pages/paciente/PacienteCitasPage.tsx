@@ -62,6 +62,8 @@ const PacienteCitasPage = () => {
 
     const handleSelectSlot = (
         ({ start }: any) => {
+            const today = new Date();
+            if (start < today.setHours(0, 0, 0, 0)) return;
             setOpenCrearCita(true);
             setStartDate(start);
         }

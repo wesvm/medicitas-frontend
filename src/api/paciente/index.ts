@@ -3,7 +3,7 @@ import { getToken } from "@/api/token-service";
 const URL = import.meta.env.VITE_API_BASE_URL;
 
 export const getPaciente = async (): Promise<PacienteDataResponse> => {
-    
+
     const token = getToken();
 
     const response = await fetch(`${URL}/paciente/me`, {
@@ -19,6 +19,26 @@ export const getPaciente = async (): Promise<PacienteDataResponse> => {
 
     const data: PacienteDataResponse = await response.json();
     return data;
+}
+
+export const getPacienteByDni = async (dni: string): Promise<PacienteDataResponse> => {
+
+    const token = getToken();
+
+    const response = await fetch(`${URL}/paciente/obtenerPacientes/${dni}`, {
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        },
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw { status: response.status, message: response.statusText };
+    }
+
+    return data as PacienteDataResponse;
 }
 
 export const getAllPacientes = async (): Promise<PacienteDataResponse[]> => {
@@ -40,11 +60,10 @@ export const getAllPacientes = async (): Promise<PacienteDataResponse[]> => {
     return data;
 }
 
-
 export const registrarPaciente = async (
     paciente: IRegistrarPaciente
 ): Promise<IMessageResponse> => {
-    
+
     const token = getToken();
     const response = await fetch(`${URL}/paciente/agregarPaciente`, {
         method: 'POST',

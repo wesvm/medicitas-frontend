@@ -1,8 +1,7 @@
-import { Card } from "@/components/card"
-import { ListarPacientesPart } from "./parts/lista-pacientes"
+import { Card } from "@/components/card";
+import { ListarPacientesPart } from "./historial-parts";
 
-const ListPacientesPage = () => {
-
+const HistorialConsultasPage = () => {
     return (
         <div className="p-4">
             <section className="mb-4">
@@ -20,4 +19,4 @@ const ListPacientesPage = () => {
     )
 }
 
-export default ListPacientesPage;
+export default HistorialConsultasPage;

@@ -107,7 +107,7 @@ export const CrearCitaForm = ({ startDate, setLoading, setOpen, refetch, loading
                 />
             </label>
             <label className="md:grid md:grid-cols-4 md:items-center gap-2 flex flex-col">
-                <span className="text-left">Especialidad* </span>
+                <span className="text-left">Especialista* </span>
                 <div className="col-span-3">
                     <Select name="especialista_id"
                         onValueChange={handleSelectChange}
