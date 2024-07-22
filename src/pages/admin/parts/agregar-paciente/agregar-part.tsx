@@ -10,7 +10,7 @@ const AgregarPaciente = () => {
     const navigate = useNavigate();
     const { refetch } = usePacientesList();
     const [loading, setLoading] = useState(false);
-    const escuelasFiltradas = ESCUELAS.filter(escuela => escuela.value !== null);
+    const escuelasFiltradas = ESCUELAS.filter(escuela => escuela.value !== null) as { label: string; value: string }[];
 
     const handleBack = () => {
         navigate(-1);
