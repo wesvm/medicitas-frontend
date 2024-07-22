@@ -27,13 +27,16 @@ export const Navbar = () => {
     return (
         <nav className="p-4 border-b h-full flex items-center shadow-sm bg-blue-900">
             <MobileSidebar />
-            <div className="flex justify-between w-full">
+            <div className="flex justify-between items-center w-full">
                 <img src={unam_logo} alt="Logo de la UNAM" className="size-16 md:ml-8 cursor-pointer"
                     onClick={handleGoHome}
                 />
+                <span className="font-bold text-xl txt-shadow capitalize pl-10">
+                    {profile?.account.rol}
+                </span>
                 <div className="flex items-center jus gap-x-4 ml-auto">
-                    <span className="font-bold text-xl txt-shadow capitalize">
-                        {profile?.account.rol}
+                    <span className="text-white font-semibold text-lg">
+                        {profile?.account.dni} - {profile?.user.nombres} {profile?.user.apellidos}
                     </span>
                     <Button onClick={handleLogout} variant="outline" size="icon" >
                         <LogOut className="size-5" />
