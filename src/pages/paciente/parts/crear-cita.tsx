@@ -64,6 +64,7 @@ export const ShowDialogCrearCita = ({
                         refetch={refetch}
                         startDate={startDate}
                         setOpen={setOpen}
+                        paciente={paciente}
                     />
                     <DialogFooter>
                         <DialogClose asChild>
@@ -102,6 +103,7 @@ export const ShowDialogCrearCita = ({
                     refetch={refetch}
                     startDate={startDate}
                     setOpen={setOpen}
+                    paciente={paciente}
                 />
                 <DrawerFooter className="pt-2">
                     <DrawerClose asChild>

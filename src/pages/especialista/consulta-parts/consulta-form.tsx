@@ -61,52 +61,55 @@ export const ConsultaForm = ({ cita, loading, setLoading, paciente, setPaciente 
     };
 
     return (
-        <form onSubmit={handleSubmit} className="grid md:grid-cols-2 gap-4 max-w-[68rem]">
-            <label className="grid grid-cols-4 items-center gap-2">
-                <span className="text-left">Motivo de la consulta*</span>
-                <Input name="motivo" type="text" className="col-span-3" defaultValue={cita?.motivo} disabled={loading} />
-            </label>
-            <label className="grid grid-cols-4 items-center gap-2">
-                <span className="text-left">Fecha y hora* </span>
-                <Input
-                    type="datetime-local"
-                    defaultValue={currentDateTime}
-                    name="fecha_hora"
-                    className="col-span-3"
-                    required
-                    disabled={loading}
-                />
-            </label>
-            <label className="grid grid-cols-4 items-center gap-2">
-                <span className="text-left">Diagnostico*</span>
-                <Textarea name="diagnostico" className="resize-none col-span-3" disabled={loading} required />
-            </label>
-            <label className="grid grid-cols-4 items-center gap-2">
-                <span className="text-left">Tratamiento*</span>
-                <Textarea name="tratamiento" className="resize-none col-span-3" disabled={loading} required />
-            </label>
-            <div className="grid grid-cols-4 items-center gap-2">
-                <span className="text-left">Proxima Cita</span>
-                <Button variant="outline" disabled={loading} className="col-span-3"
-                    onClick={() => setOpen(true)}>
-                    Agendar proxima cita
-                </Button>
-                <ShowDialogCrearCita
-                    paciente={paciente}
-                    setOpen={setOpen}
-                    open={open} startDate={new Date()}
-                    refetch={() => { }}
-                />
-            </div>
-            <label className="grid grid-cols-4 items-center gap-2">
-                <span className="text-left">Observaciones</span>
-                <Textarea name="observaciones" className="resize-none col-span-3" />
-            </label>
-            <div className="flex items-end justify-end">
-                <Button type="submit" className="w-full" disabled={loading}>
-                    Guardar Consulta
-                </Button>
-            </div>
-        </form>
+        <>
+            <form onSubmit={handleSubmit} id="saveConsulta" className="grid md:grid-cols-2 gap-4 max-w-[68rem]">
+                <label className="grid grid-cols-4 items-center gap-2">
+                    <span className="text-left">Motivo de la consulta*</span>
+                    <Input name="motivo" type="text" className="col-span-3" defaultValue={cita?.motivo} disabled={loading} />
+                </label>
+                <label className="grid grid-cols-4 items-center gap-2">
+                    <span className="text-left">Fecha y hora* </span>
+                    <Input
+                        type="datetime-local"
+                        defaultValue={currentDateTime}
+                        name="fecha_hora"
+                        className="col-span-3"
+                        required
+                        disabled={loading}
+                    />
+                </label>
+                <label className="grid grid-cols-4 items-center gap-2">
+                    <span className="text-left">Diagnostico*</span>
+                    <Textarea name="diagnostico" className="resize-none col-span-3" disabled={loading} required />
+                </label>
+                <label className="grid grid-cols-4 items-center gap-2">
+                    <span className="text-left">Tratamiento*</span>
+                    <Textarea name="tratamiento" className="resize-none col-span-3" disabled={loading} required />
+                </label>
+                <div className="grid grid-cols-4 items-center gap-2">
+                    <span className="text-left">Proxima Cita</span>
+                    <Button variant="outline" disabled={loading} className="col-span-3"
+                        onClick={() => setOpen(true)}>
+                        Agendar proxima cita
+                    </Button>
+                </div>
+                <label className="grid grid-cols-4 items-center gap-2">
+                    <span className="text-left">Observaciones</span>
+                    <Textarea name="observaciones" className="resize-none col-span-3" />
+                </label>
+                <div className="flex items-end justify-end">
+                    <Button type="submit" form="saveConsulta" className="w-full" disabled={loading}>
+                        Guardar Consulta
+                    </Button>
+                </div>
+            </form>
+            <ShowDialogCrearCita
+                paciente={paciente}
+                setOpen={setOpen}
+                open={open} startDate={new Date()}
+                refetch={() => { }}
+            />
+        </>
+
     )
 }

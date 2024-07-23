@@ -18,9 +18,10 @@ interface CrearCitaFormProps {
     loading: boolean;
     refetch: () => void;
     className?: string;
+    paciente?: PacienteDataResponse;
 }
 
-export const CrearCitaForm = ({ startDate, setLoading, setOpen, refetch, loading, className }: CrearCitaFormProps) => {
+export const CrearCitaForm = ({ startDate, setLoading, setOpen, refetch, loading, className, paciente }: CrearCitaFormProps) => {
 
     const [horarioId, setHorarioId] = useState(12);
     const [horasDisponibles, setHorasDisponibles] = useState<string[]>([]);
@@ -47,6 +48,7 @@ export const CrearCitaForm = ({ startDate, setLoading, setOpen, refetch, loading
 
         const formData = new FormData(event.currentTarget);
         const form: IRegistrarPacienteCita = {
+            paciente_id: paciente?.user_id,
             fecha: formData.get("fecha") as string || date,
             hora: formData.get("hora") as string,
             motivo: formData.get("motivo") as string,
