@@ -88,7 +88,7 @@ export const ConsultaForm = ({ cita, loading, setLoading, paciente, setPaciente 
                 </label>
                 <div className="grid grid-cols-4 items-center gap-2">
                     <span className="text-left">Proxima Cita</span>
-                    <Button variant="outline" disabled={loading} className="col-span-3"
+                    <Button variant="outline" type="button" disabled={loading} className="col-span-3"
                         onClick={() => setOpen(true)}>
                         Agendar proxima cita
                     </Button>
