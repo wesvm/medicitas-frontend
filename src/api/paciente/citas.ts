@@ -84,3 +84,22 @@ export const getCitaByIdPaciente = async (id: number): Promise<ICitaDetallePacie
     const data: ICitaDetallePacienteResponse = await response.json();
     return data;
 }
+
+export const getConsultaByCitaId = async (pacienteId: string, citaId: string): Promise<IConsultaResponse> => {
+
+    const token = getToken();
+
+    const response = await fetch(`${URL}/especialista/consultas/pacientes/${pacienteId}/${citaId}`, {
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        },
+    });
+
+    if (!response.ok) {
+        throw new Error(`Failed to get user citas: ${response.statusText}`);
+    }
+
+    const data: IConsultaResponse = await response.json();
+    return data;
+}

@@ -1,17 +1,46 @@
 import { Card } from "@/components/card";
-import { useCitasPacienteEspecialista } from "@/hooks/useCitas";
 import { useParams } from "react-router-dom";
 import { columns } from "./historial-parts/columns";
 import { DataTable } from "./historial-parts/data-table";
 import { AdminListPageLoading } from "../admin/parts/loading";
 import { usePacienteStore } from "@/store/pacienteStore";
+import { useEffect, useState } from "react";
+import { getCitasPacientesByEspecialista } from "@/api/especialista/citas";
+import { getPacienteById } from "@/api/paciente";
 
 const HistorialCitasPage = () => {
 
     const { id } = useParams();
+    const [loading, setLoading] = useState(false);
+    const [citasPaciente, setCitasPaciente] = useState<ICitasPacienteResponse[]>([])
+    const { paciente, setPaciente } = usePacienteStore();
+
+    useEffect(() => {
+        if (id) {
+            setLoading(true);
+            getCitasPacientesByEspecialista(id)
+                .then(response => {
+                    setCitasPaciente(response);
+                    setLoading(false);
+                })
+                .catch(error => {
+                    console.error(error);
+                    setLoading(false);
+                });
+
+            getPacienteById(id)
+                .then(response => {
+                    setPaciente(response);
+                    setLoading(false);
+                })
+                .catch(error => {
+                    console.error(error);
+                    setLoading(false);
+                });
+        }
+    }, [id])
+
     if (!id) return <div>Paciente invalido..</div>
-    const { citasPaciente, status } = useCitasPacienteEspecialista(id);
-    const { paciente } = usePacienteStore();
 
     return (
         <div className="p-4">
@@ -24,7 +53,7 @@ const HistorialCitasPage = () => {
             </section>
             <section>
                 <Card>
-                    {status === 'pending' ?
+                    {loading ?
                         <AdminListPageLoading />
                         :
                         <DataTable columns={columns} data={citasPaciente} />

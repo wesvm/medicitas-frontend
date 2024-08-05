@@ -20,7 +20,7 @@ const ReportesPage = () => {
     return (
         <div className="p-4">
             <section className="mb-4">
-                <Card className="flex items-center justify-between">
+                <Card className="flex items-center justify-between flex-wrap">
                     <h1 className="font-bold text-2xl">Vista de reportes</h1>
                     <CarrerFilter setDate={setDateRange} date={dateRange} />
                     <DateFilter setDate={setDateRange} date={dateRange} today={today} />

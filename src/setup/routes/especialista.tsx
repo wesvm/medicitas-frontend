@@ -36,6 +36,10 @@ export const especialistaRoutes: RouteProps = {
             element: lazy(async () => await import("@/pages/paciente/HistorialConsultasPage")),
         },
         {
+            path: "pacientes/:id/consulta/:cId",
+            element: lazy(async () => await import("@/pages/paciente/ConsultaDetailPage")),
+        },
+        {
             path: "pacientes/:id/citas",
             element: lazy(async () => await import("@/pages/paciente/HistorialCitasPage")),
         },

@@ -35,7 +35,7 @@ export const Navbar = () => {
                     {profile?.account.rol}
                 </span>
                 <div className="flex items-center jus gap-x-4 ml-auto">
-                    <span className="text-white font-semibold text-lg">
+                    <span className="md:block hidden text-white font-semibold text-lg">
                         {profile?.account.dni} - {profile?.user.nombres} {profile?.user.apellidos}
                     </span>
                     <Button onClick={handleLogout} variant="outline" size="icon" >

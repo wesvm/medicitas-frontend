@@ -5,32 +5,27 @@ import { usePacienteStore } from "@/store/pacienteStore";
 import { columns } from "./consulta-parts/columns";
 import { DataTable } from "./consulta-parts/data-table";
 import { useEffect, useState } from "react";
-import { getConsultasPacientesByEspecialista } from "@/api/especialista/citas";
 import { getPacienteById } from "@/api/paciente";
+import { getConsultaByCitaId } from "@/api/paciente/citas";
 
-const HistorialConsultasPage = () => {
+const ConsultaDetailPage = () => {
 
-    const { id } = useParams();
+    const { id, cId } = useParams();
     const [loading, setLoading] = useState(false);
     const { paciente, setPaciente } = usePacienteStore();
-    const [consultasPaciente, setConsultasPaciente] = useState<IConsultaResponse[]>([]);
+    const [consultaPaciente, setConsultaPaciente] = useState<IConsultaResponse[]>([]);
 
     useEffect(() => {
-        if (id) {
+        if (id && cId) {
             setLoading(true);
-            getConsultasPacientesByEspecialista(id)
-                .then(response => {
-                    setConsultasPaciente(response);
-                    setLoading(false);
-                })
-                .catch(error => {
-                    console.error(error);
-                    setLoading(false);
-                });
 
-            getPacienteById(id)
-                .then(response => {
-                    setPaciente(response);
+            Promise.all([
+                getConsultaByCitaId(id, cId),
+                getPacienteById(id)
+            ])
+                .then(([consultaResponse, pacienteResponse]) => {
+                    setConsultaPaciente(consultaResponse ? [consultaResponse] : []);
+                    setPaciente(pacienteResponse);
                     setLoading(false);
                 })
                 .catch(error => {
@@ -38,9 +33,8 @@ const HistorialConsultasPage = () => {
                     setLoading(false);
                 });
         }
-    }, [id])
-
-    if (!id) return <div>Paciente invalido..</div>;
+    }, [id, cId]);
+    if (!id || !cId) return <div>Paciente invalido..</div>;
 
     return (
         <div className="p-4">
@@ -56,7 +50,7 @@ const HistorialConsultasPage = () => {
                     {loading ?
                         <AdminListPageLoading />
                         :
-                        <DataTable columns={columns} data={consultasPaciente} />
+                        <DataTable columns={columns} data={consultaPaciente} />
                     }
                 </Card>
             </section>
@@ -64,4 +58,4 @@ const HistorialConsultasPage = () => {
     )
 }
 
-export default HistorialConsultasPage;
+export default ConsultaDetailPage;

@@ -41,6 +41,26 @@ export const getPacienteByDni = async (dni: string): Promise<PacienteDataRespons
     return data as PacienteDataResponse;
 }
 
+export const getPacienteById = async (id: string): Promise<PacienteDataResponse> => {
+
+    const token = getToken();
+
+    const response = await fetch(`${URL}/paciente/obtenerPacienteById/${id}`, {
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        },
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw { status: response.status, message: response.statusText };
+    }
+
+    return data as PacienteDataResponse;
+}
+
 export const getAllPacientes = async (): Promise<PacienteDataResponse[]> => {
 
     const token = getToken();

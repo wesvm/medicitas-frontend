@@ -21,4 +21,8 @@ export const columns: ColumnDef<EspecialistaData>[] = [
         accessorKey: "telefono",
         header: "Telefono",
     },
+    {
+        accessorKey: "especialidad",
+        header: "Especialidad",
+    },
 ]

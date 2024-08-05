@@ -33,8 +33,10 @@ export function DataTableRowActions<TData>({
     const { refetch } = useRefetchStore();
     const handleViewConsultationHistory = () => {
         const patientId = (row.original as { paciente_id: number }).paciente_id;
+        const citaId = (row.original as { id: number }).id;
+
         setPaciente(row.original as PacienteDataResponse)
-        navigate(`/dashboard/pacientes/${patientId}/historial-consultas`);
+        navigate(`/dashboard/pacientes/${patientId}/consulta/${citaId}`);
     };
 
     const handleChangeStatus = async (newStatus: string) => {
