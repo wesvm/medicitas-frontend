@@ -32,6 +32,18 @@ export const adminRoutes: RouteProps = {
             element: lazy(async () => await import("@/pages/admin/ListPacientesPage")),
         },
         {
+            path: "pacientes/:id/historial-consultas",
+            element: lazy(async () => await import("@/pages/paciente/HistorialConsultasPage")),
+        },
+        {
+            path: "pacientes/:id/citas",
+            element: lazy(async () => await import("@/pages/paciente/HistorialCitasPage")),
+        },
+        {
+            path: "pacientes/nuevo",
+            element: lazy(async () => await import("@/pages/admin/parts/agregar-paciente/agregar-part")),
+        },
+        {
             path: "especialistas",
             element: lazy(async () => await import("@/pages/admin/ListEspecialistasPage")),
         },

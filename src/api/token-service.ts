@@ -1,16 +1,16 @@
 const TOKEN_KEY = 'access_token';
 
 export const setToken = (token: string) => {
-    localStorage.removeItem(TOKEN_KEY);
-    localStorage.setItem(TOKEN_KEY, token)
+    sessionStorage.removeItem(TOKEN_KEY);
+    sessionStorage.setItem(TOKEN_KEY, token)
 };
 
 export const getToken = (): string | null => {
-    return localStorage.getItem(TOKEN_KEY);
+    return sessionStorage.getItem(TOKEN_KEY);
 };
 
 export const removeToken = (): void => {
-    localStorage.removeItem(TOKEN_KEY);
+    sessionStorage.removeItem(TOKEN_KEY);
 };
 
 export const getTokenExpiration = (token: string): boolean => {
